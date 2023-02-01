@@ -1,0 +1,32 @@
+\section{Một số chiến lược quan trọng khi xây dựng dashboard với Grafana}
+Khi có nhiều thông tin để giám sát, ta cần có chiến lược cụ thể để quyết định xem những yếu tố quan trọng nào nên được ưu tiên quan tâm hơn cả. Một chiến lược hợp lý cho phép bạn tạo ra được các dashboard nhất quán với nhau và khiến cho việc quan sát thông tin trở nên dễ dàng, thuận tiện hơn. Nội dung phần này sẽ giới thiệu một số phương pháp phổ biến để lựa chọn nội dung giám sát như vậy.
+
+\subsection{Chiến lược USE}
+Chiến lược USE đặc biệt phù hợp cho việc theo dõi hạ tầng tài nguyên phần cứng, như CPU, bộ nhớ, thiết bị mạng,… Trong đó, USE là viết tắt cho:
+\begin{itemize}
+    \item \textit{Utilization (Mức độ sử dụng)}: Tỉ lệ tài nguyên đang sử dụng, ví dụ như: tỉ lệ node CPU được sử dụng.
+    \item \textit{Saturation (Độ bão hòa)}: Số lượng tác vụ mà một đơn vị tài nguyên phải thực hiện, độ dài hàng đợi (queue) trung bình, số lượng nút (node) chịu tải.
+    \item \textit{Errors (Lỗi)}: Số lượng sự kiện lỗi xảy ra.
+\end{itemize}
+Chiến lược USE sẽ cho ta biết các thông tin quan trọng để nhận diện được nguyên nhân của những vấn đề phát sinh. 
+
+\subsection{Chiến lược RED}
+Chiến lược RED là chiến lược được sử dụng phổ biến nhất, đặc biệt là với môi trường microservices. Trong đó, RED là viết tắt cho:
+\begin{itemize}
+    \item \textit{Rate (Tốc độ)}: Số lượng yêu cầu trong một giây (hoặc một đơn vị thời gian).
+    \item \textit{Errors (Lỗi)}: Số lượng yêu cầu không được xử lý hoặc xử lý không thành công.
+    \item \textit{Duration (Thời gian)}: Thời gian để thực hiện một yêu cầu, phân bố của các chỉ báo đo lường độ trễ.
+\end{itemize}
+Dashboard được xây dựng theo chiến lược RED sẽ có tính cảnh báo cao, thuận tiện cho việc giám sát quá trình vận hành của ứng dụng. 
+
+\subsection{Bốn chỉ báo \textit{vàng}}
+Theo cẩm nang Google SRE, trong trường hợp chỉ có thể chọn ra 04 chỉ báo quan trọng nhất cho hệ thống giám sát, chúng ta nên tập trung vào các chỉ báo sau:
+\begin{itemize}
+    \item \textit{Latency (Độ trễ)} phản ánh thời gian cần thiết để thực hiện một yêu cầu.
+    \item \textit{Traffic (Lưu lượng)} phản ánh số lượng yêu cầu mà hệ thống của bạn cần giải quyết.
+    \item \textit{Errors (Lỗi)} phản ánh tỉ lệ yêu cầu thực hiện không thành công.
+    \item \textit{Saturation (Độ bão hòa)} phản ánh hệ thống đã “đầy” (full) đến mức độ nào.
+\end{itemize}
+Bốn chỉ báo vàng này khá tương đồng với chiến lược RED, tuy nhiên bổ sung thêm Saturation (Độ bão hòa).
+
+\textit{Tóm lại}, chiến lược USE sẽ cho bạn biết hệ thống máy móc của bạn đang happy đến đâu, trong khi chiến lược RED sẽ cho bạn biết người dùng của bạn đang happy như thế nào. Trong khi chiến lược USE thường được sử dụng để tìm hiểu nguyên nhân xảy ra vấn đề, thì chiến lược RED thường được sử dụng để đo lường trải nghiệm người dùng, hay cũng có thể nói là đo lường triệu chứng, dấu hiệu của vấn đề. Trong thực tiễn, nhiệm vụ xác định sớm các triệu chứng của vấn đề thường được coi là nhiệm vụ quan trọng hơn của các hệ thống giám sát, cảnh báo, vì thế chiến lược RED cũng thường xuyên được sử dụng hơn.
