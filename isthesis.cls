@@ -667,7 +667,7 @@
 \isthesis@new@option{author-zip}{author@zip}{}
 \isthesis@new@option{author-city}{author@city}{}
 \isthesis@new@option{studies}{author@studies}{International Information Systems}
-\isthesis@new@option{group}{group@name}{Khoa Toán cơ tin}
+\isthesis@new@option{group}{group@name}{Khoa Toán-Cơ-Tin học}
 \isthesis@new@option{group-institute}{group@institute}{}
 \isthesis@new@option{group-university}{group@university}{Đại học Quốc gia Hà Nội}
 % \isthesis@new@option{associate-group}{associate@group@name}{Đại học Khoa học Tự nhiên}

@@ -1,0 +1,22 @@
+\chapter{Phương pháp giải}
+Tìm kiếm lân cận heuristics thường dựa trên các di chuyển lân cận thay đổi nhỏ so với lời giải hiện tại như là chuyển yêu cầu từ tuyến đường này sang tuyến đường khác hoặc là tráo đổi 2 yêu cầu, như trong bài của Nanry \& Barnes (2000) và Li \& Lim (2001). Những kiểu tìm kiếm lân cận này có thể kiểm tra một lượng lớn phương án trong thời gian ngắn, nhưng phương án được cập nhật rất nhỏ qua mỗi vòng lặp. Đó là điều khiến tác giả tin rằng các phương pháp này có thể gặp khó trong việc di chuyển từ vùng triển vọng này của phương án tới vùng khác khi phải đối mặt với các ràng buộc chặt ngay cả khi áp dụng metaheuristics.
+
+Một trong những cách để giải quyết vấn đề này là cho phép tìm kiếm đi qua các phương án chấp nhận được bằng cách nới lỏng các ràng buộc (ví dụ trong Cordeau, Laporte \& Mercier (2001)). Tác giả chọn một cách tiếp cận khác, thay vì sử dụng bước đi chuyển nhỏ, tác giả sử dụng các bước di chuyển rất lớn mà có thể sắp xếp 30\% đến 40\% tất cả các yêu cầu trong một bước lắp. Sự đánh đổi của việc này là thời gian tính toán cần thiết và việc đánh giá các bước di chuyển trở nên lớn hơn khi so sánh với việc di chuyển các bước nhỏ. Số phương án được đánh giá bởi heuristic tiềm năng trên một đơn vị thời gian chỉ là một phần nhỏ của các phương án được đánh giá trên một heuristic chuẩn. Tuy nhiên, thuật toán cho hiệu năng rất tối trong các bài tests được trình bày trong \$4.
+
+Heuristic tiềm năng dựa trên \textit{large neighbourhood search (LNS)}, được giới thiệu bởi Shaw (1997). LNS heuristic đã được áp dụng vào VRPTW với các kết quả tốt (Shaw 1997, 1998; Bent \& Van Hentenryck 2004). LNS heuristic tương tự với \textit{ruin and recreate} heuristic được trình bày bởi Schrimpf et al. (2000).
+
+Mã giả cho một LNS heuristic tối thiểu được trình bày trong Algorithm 1
+
+\begin{algorithm}
+	\caption{PPO} 
+	\begin{algorithmic}[1]
+		\For {$iteration=1,2,\ldots$}
+			\For {$actor=1,2,\ldots,N$}
+				\State Run policy $\pi_{\theta_{old}}$ in environment for $T$ time steps
+				\State Compute advantage estimates $\hat{A}_{1},\ldots,\hat{A}_{T}$
+			\EndFor
+			\State Optimize surrogate $L$ wrt. $\theta$, with $K$ epochs and minibatch size $M\leq NT$
+			\State $\theta_{old}\leftarrow\theta$
+		\EndFor
+	\end{algorithmic} 
+\end{algorithm}

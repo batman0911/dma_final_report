@@ -9,7 +9,8 @@
 	type=master, % set to bachelor, master or seminar
 ]{isthesis}
 
-\usepackage[utf8]{vietnam}
+\usepackage[utf8]{vntex}
+% \usepackage[vietnamese]{babel}
 
 % custom package
 \usepackage{eurosym}
@@ -18,6 +19,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{tabto} 
 \usepackage{longtable}
+\usepackage{algorithm} 
+\usepackage{algpseudocode}
 % \usepackage{multirow}
 % \usepackage{floatrow}
 
@@ -51,9 +54,8 @@
 % Document meta information
 \isthesis{
     title={TIỂU LUẬN},
-    sub-title={Một số vấn đề về đồ hoạ máy tính \\
-    Giám sát hệ thống micro-services và vấn đề logging},
-    author-name={Nguyễn Mạnh Linh, Nguyễn Đức Thịnh}, 
+    sub-title={Toán rời rạc và thuật toán\\ Phương pháp tìm kiếm lân cận rộng thích ứng \\ cho bài toán lấy và giao hàng với ràng buộc thời gian},
+    author-name={Nguyễn Mạnh Linh, Nguyễn Thị Đông, Triệu Hồng Thuý}, 
     % Separate multiple authors with commas
     % author-email={linhnguyen.code@gmail.com},
     % author-matriculation={MATRICULATION NUMBER},
@@ -61,7 +63,7 @@
     % author-address={STREET},
     % author-zip={ZIP},
     % author-city={CITY},
-    principal-supervisor={TS. Nguyễn Thị Bích Thuỷ}, % This must be a professor
+    principal-supervisor={PGS.TS. Nguyễn Thị Hồng Minh}, % This must be a professor
     % associate-supervisor={SUPERVISOR}, % This is your main supervisor, i.e., a post doc or doctoral student
     tutor-supervisor={}, % If required, define an additional supervisor resp. tutor here
     group-institute={Đại học Khoa học Tự nhiên},
@@ -71,7 +73,7 @@
     %associate-group={}, % When the thesis is done in cooperation with another chair, add it here
     %associate-group-institute={}, % add cooperating institute or university here
     seminar={SEMINAR}, % The title of your seminar
-    submission-date={2023-01-10}, % The date you handed in your document: Format yyyy-mm-dd
+    submission-date={2023-02-01}, % The date you handed in your document: Format yyyy-mm-dd
     primary-logo={assets/hus.png}, % Uses the FAU logo by default
     %primary-logo-height={}, % Uses 16mm as default height
     %secondary-logo={}, % Logo of the secondary institution (cooperating chair/university), USES Faculty logo by default
@@ -129,8 +131,9 @@
     \begin{content}
         % Add your content files:
         \input{sections/01_introduction.tex}
-        \input{sections/02_grafana_monitor.tex}
-        \input{sections/03_elk.tex}
+        \input{sections/02_solution_method.tex}
+        \input{sections/03_LNS_apply.tex}
+        \input{sections/04_experiments.tex}
         \input{sections/conclusion.tex}
         % \input{sections/introduction.tex}
         % \input{sections/gmres_arnoldi.tex}
@@ -140,7 +143,7 @@
     \setcounter{page}{\numexpr\value{savepage}}
 
     % References
-    \references{}
+    % \references{}
     \input{ref.tex}
     % \bibliography{refs}
     
