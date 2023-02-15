@@ -1,6 +1,7 @@
 \chapter{Giới thiệu}
-Trong kỷ nguyên số hiện nay, trực quan hóa dữ liệu đang được ứng dụng rộng rãi trong nhiều lĩnh vực, hoạt động khác nhau của đời sống. Trong đó phải kể đến vai trò của nó đối với việc xây dựng các dashboard hỗ trợ quá trình quản trị vận hành và giám sát các hoạt động của doanh nghiệp, đặc biệt là trong bối cảnh dữ liệu ngày càng trở nên dồi dào, phong phú hơn nhưng cũng đồng thời khó tổng hợp, xử lí, khai thác hơn. Các dashboard này không chỉ là công cụ hữu hiệu giúp phân tích, khai phá thông tin giá trị (insight) từ dữ liệu, mà còn có ý nghĩa quan trọng đối với việc đưa ra các cảnh báo sớm hoặc hỗ trợ đưa ra quyết định dựa trên dữ liệu (data driven decision). 
-
-Trong lĩnh vực công nghệ thông tin, một hệ thống giám sát, cảnh báo trực quan như vậy cũng vô cùng cần thiết cho quá trình quản trị và vận hành phần mềm. Không có một sản phẩm phần mềm nào có thể vừa phát triển nhanh, vừa chạy ổn định (ít hoặc không có lỗi), lại vừa có hiệu năng cao và sử dụng ít tài nguyên, chúng ta luôn phải đánh đổi. Vì vậy, khi triển khai một phần mềm trong thực tiễn, lập trình viên cũng như người quản trị hệ thống cần nắm rõ \textit{sức khoẻ} của sản phẩm, ví dụ như: phần mềm đang tiêu tốn bao nhiêu tài nguyên của máy tính, phần mềm xử lý yêu cầu nhanh hay chậm, hay có bao nhiêu lỗi xảy ra trong mỗi khung giờ,... Những thông số hay độ đo này là thước đo để biết được sản phẩm có đủ tốt hay không, và quan trọng hơn là cảnh báo sớm cho người làm phần mềm về những nguy cơ có thể xảy ra. Và một hệ thống giám sát tốt kèm theo các ngưỡng cảnh báo hợp lý sẽ giúp ta nhanh chóng phát hiện các lỗi phát sinh trong phần mềm, đồng thời từ đó đưa ra kịch bản ứng cứu sớm (trong ngắn hạn) và định hướng phát triển sản phẩm cũng như tài nguyên hệ thống (trong dài hạn).
-
-Báo cáo này sẽ tập trung giới thiệu các kĩ thuật, độ đo như đã đề cập ở trên, bên cạnh đó là một số kinh nghiệm kết hợp khéo léo giữa bản thân phần mềm (ghi log) và các công cụ đó trong quá trình quản trị vận hành dựa trên những trải nghiệm thực tiễn của tác giả. Trực quan hoá dữ liệu được sử dụng một cách triệt để trong cả việc cung cấp thông tin tổng quan và thông tin chi tiết, giúp cho người vận hành hệ thống cũng như lập trình viên luôn kiểm soát tốt được hoạt động của phần mềm.
+\begin{figure}[H] % places figure environment here   
+  \centering % Centers Graphic
+  \includegraphics[width=0.8\textwidth]{figures/time_series_light_theme_sized.png} 
+  \caption{Biểu đồ dữ liệu hướng thời gian} % Creates caption underneath graph
+  \label{fig:fig_01}
+\end{figure}
