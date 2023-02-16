@@ -1,0 +1,60 @@
+\section{Xóa yêu cầu}
+Có 3 phương pháp heuristic dùng cho việc xóa yêu được trình bày trong phần này. Cả 3 phương pháp đều sử dụng 1 cách và 1 số nguyên dương \textit{q} là đầu vào. Đầu ra là 1 phương pháp với \textit{q} là số yêu cầu đã được xóa. Hơn nữa, \textit{Shaw removal} heuristic và \textit{worst removal} heuristic có tham số \textit{p} biểu diễn cho mức độ ngẫu nhiên trong thuật toán.
+
+\subsection{Phương pháp xóa Shaw Heuristic}
+Phương pháp xóa này được phát triển bởi Shaw (1997, 1998). Cách trình bày trong phần này đã được chỉnh sửa lại để phù hợp với PDPTW. Ý tưởng chung là xóa bỏ các yêu cầu giống nhau, vì chúng ta hy vọng sẽ dễ dàng trộn các yêu cầu tương tự với nhau và tạo ra các giải pháp mới có thể tốt hơn. Nếu chúng ta chọn xóa bỏ các yêu cầu khác nhau, thì sau đó, việc thêm các yêu cầu mới sẽ không nhận lại được điều gì do các yêu cầu này có thể chỉ được thêm vào tại vị trí ban đầu của chúng hoặc ở các vị trí tồi tệ. Mức độ tương đồng giữa 2 yêu cầu \textit{i} và \textit{j} được định nghĩa dựa trên chỉ số độ tương đồng $R(i,j)$. Chỉ số này càng thấp thì 2 yêu cầu càng giống nhau.
+
+Chỉ số độ tương đồng được sử dụng trong bài này bao gồm phụ thuộc vào 4 điều kiện: khoảng cách, thời gian, khối lượng và khả năng phương tiện có thể sử dụng để phục vụ 2 yêu cầu cùng lúc. Các điều kiện này được đánh trọng số và ký hiệu lần lượt là $\varphi$, $\chi$, $\psi$ và $\omega$. Chỉ số độ tương đồng được tính như sau:
+
+\begin{equation}
+\begin{split}
+    R(i,j) = \varphi(d_{A(i), A(j)} + d_{B(i), B(j)}) + \chi(|T_{A(i)}-T_{A(j)}| + |T_{B(i)} - T_{B(j)}|)  + \\ \psi(||l_i - l_j) + \omega(1 - \frac{|K_i \cap K_j|}{min(|K_i|, K_j)})
+\end{split}
+\end{equation}
+
+\textit{A(i)} và \textit{B(i)} biểu diễn cho điểm lấy và giao hàng của yêu cầu i, $T_i$ là thời gian khi đến địa điểm \textit{i}, $d_{ij}, l_{i}, K_i$ được định nghĩa trong Phần 1. Sử dụng biến quyết định $S_{ik}$ trong Phần 1, ta có $T_i = \sum_{k \in K} \sum_{j \in V_k} S_{ik} x_{ijk}$. Các trọng số $\varphi$, $\chi$, $\psi$ và $\omega$ lần lượt biểu diễn cho khoảng cách, sự kết nối tạm thời, nhu cầu khối tượng và sự bảo đảm 2 yêu cầu có độ liên quan cao nếu chỉ 1 hoặc không phương tiện nào có khả năng phục vụ cả 2 yêu cầu. Giả sử $d_{ij}, T_x, l_i$ được chuẩn hóa như sau: $0 \leqslant R_{i,j} \leqslant 2(\varphi + \chi) + \psi + \omega$. Điều này được đảm bảo khi $d_{ij}, T_x, l_i$ nằm trong khoảng [0, 1]. Chú ý rằng ta không thể tính toán \textit{R(i, j)} nếu yêu cầu \textit{i} hoặc \textit{j} được đặt trong hàng chờ.
+
+Mức độ liên quan được sử dụng để loại bỏ các yêu cầu trong cùng 1 cung đường được mô tả bởi Shaw (1997), được mô tả trong Algorithm 2. Ban đầu, 1 yêu cầu được chọn ngẫu nhiên và xóa. Trong các vòng lặp tiếp theo, thuật toán sẽ thực hiện xóa các yêu cầu giống với các yêu cầu đã được xóa. Tham số $p \geqslant 1$ biểu diễn cho sự ngẫu nhiên trong cách lựa chọn yêu cầu (\textit{p} càng thấp thì độ ngẫu nhiên càng cao).
+
+\begin{algorithm}
+	\caption{Shaw Removal} 
+	\begin{algorithmic}[1]
+        \Require $s \in {solutions}, q \in \mathbb{N}, p \in \mathbb{R}_{+}$
+        \State request: r=a randomly selected request from s;
+        \State set of requests: D={r};
+        \While {$|\mathbb{D}| < q$}
+		  \State r = a randomly selected request from $\mathbb{D}$;
+            \State Array: L = an array containing all request from s not in $\mathbb{D}$;
+            \State sort \textit{L} such that $i<j \Rightarrow R(r, L\left[ i \right]) < R(r, L\left[ j \right])$;
+            \State choose a random number \textit{y} from the interval [0, 1);
+            \State $D=D\cup {L \left[ y^p|L| \right]}$
+        \EndWhile
+    \State remove the requests in \textit{D} from \textit{s};
+	\end{algorithmic} 
+\end{algorithm}
+
+Lưu ý rằng việc sắp xếp tại dòng 7 có thể lược bỏ được trong quá trình triển khai thuật toán thực tế vì chỉ cần sử dụng thuật toán chọn thời gian tuyến tính (Cormen và nhóm tác giả 2001) trong dòng 9 là đủ.
+
+\subsection{Phương pháp xóa ngẫu nhiên}
+Thuật toán xóa ngẫu nhiên đơn giản chọn ngẫu nhiên \textit{q} yêu cầu và loại bỏ chúng từ tập giải pháp. Kỹ thuật này có thể coi là 1 trường hợp đặc biệt của phương pháp xóa Shaw với \textit{p}=1. Tuy nhiên, chúng tôi đã cài đặt 1 kỹ thuật riêng biệt nhanh hơn
+
+\subsection{Phương pháp xóa tệ nhất}
+Cho 1 yêu cầu \textit{i} được phục vụ bởi vài phương tiện trong tập giải pháp \textit{s}, chúng tôi định nghĩa chi phí của yêu cầu \textit{cost} như sau: $cost(i,s)=f(s)-f_{-i}(s)$ với $f_{-i}(s)$ là chi phí của giải pháp mà không có yêu cầu i (yêu cầu được xóa mà không chuyển đến hàng chờ). Nó có vẻ hợp lý khi cố gắng xóa các yêu cầu với chi phí cao và thêm chúng vào vị trí khác trong tập giải pháp để có được phương pháp tốt hơn. Vì vậy, chúng tôi đề xuất 1 kỹ thuật xóa các yêu cầu có chi phí $cost(i, s)$ cao.
+
+Phương pháp này được biểu diễn trong Algorithm 3. Nó sử dụng lại vài ý tưởng từ Phần 3.1.1.
+
+Lưu ý rằng việc thực hiện xóa là ngẫu nhiên, với mức độ ngẫu nhiên được kiểm soát bởi biến \textit{p} trình bày trong Phần 3.1.1. Điều này được thực hiện để tránh trường hợp yêu cầu bị xóa bỏ lặp đi lặp lại.
+
+\begin{algorithm}
+    \caption{Worst Removal} 
+	\begin{algorithmic}[1]
+        \Require $s \in {solutions}, q \in \mathbb{N}, p \in \mathbb{R}_{+}$
+        \While {$q > 0$}
+		  \State Array: \textit{L} = All planned requests \textit{i}, sorted by descending \textit{cost(i,s};
+            \State choose a random number \textit{y} in the interval [0, 1);
+            \State request: $r = L\left[ y^p |L| \right]$;
+            \State remove r from solution s;
+            \State $q = q-1$;
+        \EndWhile
+	\end{algorithmic} 
+\end{algorithm}
