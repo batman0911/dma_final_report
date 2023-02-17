@@ -17,26 +17,26 @@ Cuối cùng $z_i i \in P$ là biến nhị phân cho biết yêu cầu i có đ
 \end{equation}
 Trong đó:
 \begin{flalign}
-    &\sum_{k \in K_i} \sum_{j \in N_k} x_{ijk} + z_i = 1 \quad\forall i \in P& \\
-    &\sum_{j \in V_k} x_{ijk} - \sum_{j \in V_k} x_{j,n+i,k}=0 \quad \forall k \in K, \forall i \in P_k&\\
-    &\sum_{j \in P_k \cup \{\acute{\tau_k}\}}x_{\tau_k,j,k}=1 \quad \forall k \in K&\\
-    &\sum_{i \in D_k \cup \tau_k} x_{i,\acute{\tau_k},k}=1 \quad \forall k \in K&\\
-    &\sum_{i \in V_k}x_{ijk}-\sum_{i \in V_k}x_{jik}=0\quad \forall k \in K, \forall j \in N_k&\\
-    &x_{ijk}=1 \Rightarrow S_{ik}+s_i+t_{ij}<S_{jk}\quad \forall k \in K, \forall (i,j) \in A_k&\\
-    &a_i \geq S_{ik} \geq b_i \quad \forall k \in K, \forall i \in V_k&\\
-    &S_{ik}\geq S_{n+i} \quad \forall k \in K, \forall i \in P_k&\\
-    &x_{ijk}=1 \Rightarrow L_{ik}+l_j \leq L_{jk} \quad \forall k \in K, \forall (i,j) \in A_k&\\
-    &L_{ik}\leq C_k \quad \forall k \in K, \forall i \in V_k&\\
-    &L_{\tau_k k}=L_{\acute{\tau_k}k} \quad \forall k \in K&\\
-    &x_{ijk} \in \{0,1\} \quad \forall k \in K, \forall (i,j) \in A_k&\\
-    &z_i \in \{0,1\} \quad \forall i \in P &\\
-    &S_{ik} \geq 0 \quad \forall k \in K, \forall i \in V_k&\\
-    &L_{ik} \geq 0 \quad \forall k \in K, \forall i \in V_k
+    \label{ct:2} &\sum_{k \in K_i} \sum_{j \in N_k} x_{ijk} + z_i = 1 \quad\forall i \in P& \\ 
+    \label{ct:3}&\sum_{j \in V_k} x_{ijk} - \sum_{j \in V_k} x_{j,n+i,k}=0 \quad \forall k \in K, \forall i \in P_k&\\
+    \label{ct:4}&\sum_{j \in P_k \cup \{\acute{\tau_k}\}}x_{\tau_k,j,k}=1 \quad \forall k \in K&\\
+    \label{ct:5}&\sum_{i \in D_k \cup \tau_k} x_{i,\acute{\tau_k},k}=1 \quad \forall k \in K&\\
+    \label{ct:6}&\sum_{i \in V_k}x_{ijk}-\sum_{i \in V_k}x_{jik}=0\quad \forall k \in K, \forall j \in N_k&\\
+    \label{ct:7}&x_{ijk}=1 \Rightarrow S_{ik}+s_i+t_{ij}<S_{jk}\quad \forall k \in K, \forall (i,j) \in A_k&\\
+    \label{ct:8}&a_i \geq S_{ik} \geq b_i \quad \forall k \in K, \forall i \in V_k&\\
+    \label{ct:9}&S_{ik}\geq S_{n+i} \quad \forall k \in K, \forall i \in P_k&\\
+    \label{ct:10}&x_{ijk}=1 \Rightarrow L_{ik}+l_j \leq L_{jk} \quad \forall k \in K, \forall (i,j) \in A_k&\\
+    \label{ct:11}&L_{ik}\leq C_k \quad \forall k \in K, \forall i \in V_k&\\
+    \label{ct:12}&L_{\tau_k k}=L_{\acute{\tau_k}k} \quad \forall k \in K&\\
+    \label{ct:13}&x_{ijk} \in \{0,1\} \quad \forall k \in K, \forall (i,j) \in A_k&\\
+    \label{ct:14}&z_i \in \{0,1\} \quad \forall i \in P &\\
+    \label{ct:15}&S_{ik} \geq 0 \quad \forall k \in K, \forall i \in V_k&\\
+    \label{ct:16}&L_{ik} \geq 0 \quad \forall k \in K, \forall i \in V_k
 \end{flalign}
 
 Hàm mục tiêu giảm thiểu tổng trọng số của quãng đường đã đi, tổng thời gian mà mỗi phương tiện sử dụng và số lượng yêu cầu không được lên lịch.
 
-Ràng buộc (2) đảm bảo rằng mỗi địa điểm nhận được truy cập hoặc yêu cầu tương ứng được đặt trong ngân hàng yêu cầu. Ràng buộc (3) đảm bảo rằng địa điểm giao hàng được truy cập nếu địa điểm nhận hàng được truy cập và chuyến thăm đó được thực hiện bởi cùng một phương tiện. Các ràng buộc (4) và (5) đảm bảo rằng một phương tiện rời khỏi mọi bến đầu và một phương tiện đi vào mọi bến cuối. Cùng với ràng buộc (6), điều này đảm bảo rằng các đường dẫn liên tiếp giữa $\tau_k$ và $\acute{\tau_k}$ được hình thành cho mỗi $k \in K$.
+Ràng buộc (\ref{ct:2}) đảm bảo rằng mỗi địa điểm nhận được truy cập hoặc yêu cầu tương ứng được đặt trong ngân hàng yêu cầu. Ràng buộc (\ref{ct:3}) đảm bảo rằng địa điểm giao hàng được truy cập nếu địa điểm nhận hàng được truy cập và chuyến thăm đó được thực hiện bởi cùng một phương tiện. Các ràng buộc (\ref{ct:4}) và (\ref{ct:5}) đảm bảo rằng một phương tiện rời khỏi mọi bến đầu và một phương tiện đi vào mọi bến cuối. Cùng với ràng buộc (\ref{ct:6}), điều này đảm bảo rằng các đường dẫn liên tiếp giữa $\tau_k$ và $\acute{\tau_k}$ được hình thành cho mỗi $k \in K$.
 
-Các ràng buộc (7) và (8) đảm bảo rằng $S_ik$ được đặt chính xác dọc theo các con đường và các thời gian ràng buộc được tuân theo. Những ràng buộc này cũng làm cho các \textit{subtour} không thể thực hiện được.
-Ràng buộc (9) đảm bảo rằng mỗi lần lấy hàng xảy ra trước lần giao hàng tương ứng. Các ràng buộc (10), (11) và (12) đảm bảo rằng biến tải trọng được đặt chính xác dọc theo các con đường và các ràng buộc về sức chứa của các phương tiện được tuân thủ
+Các ràng buộc (\ref{ct:7}) và (\ref{ct:8}) đảm bảo rằng $S_ik$ được đặt chính xác dọc theo các con đường và các thời gian ràng buộc được tuân theo. Những ràng buộc này cũng làm cho các \textit{subtour} không thể thực hiện được.
+Ràng buộc (\ref{ct:9}) đảm bảo rằng mỗi lần lấy hàng xảy ra trước lần giao hàng tương ứng. Các ràng buộc (\ref{ct:10}), (\ref{ct:11}) và (\ref{ct:12}) đảm bảo rằng biến tải trọng được đặt chính xác dọc theo các con đường và các ràng buộc về sức chứa của các phương tiện được tuân thủ
