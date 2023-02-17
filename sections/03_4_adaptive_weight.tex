@@ -1,0 +1,28 @@
+\section{Điều chỉnh trọng số tự động}
+Phần này trình bày cách các trọng số $\omega_i$ được giới thiệu trong Phần 3.3 có thể tự động điều chỉnh khi sử dụng phương pháp thống kê từ các vòng lặp trước. Ý tưởng chung là theo dõi 1 điểm số đại diện cho độ hiệu quả của thuật toán trong các vòng lặp gần đây. Điểm số này càng cao thì thuật toán càng hiệu quả. Cả quá trình tìm kiếm được chia thành nhiều bước. 1 bước là 1 số vòng lặp của ALNS heuristic; ở đây chúng tôi chọn 1 bước là 100 vòng lặp. Điểm số heuristic được đặt bằng 0 khi bắt đầu mỗi bước và được tăng thêm $\sigma_1, \sigma_2, \sigma_3$ tùy các trường hợp ghi trong Bảng 1.
+
+% \begin{table}[]
+%     \centering
+%     \begin{tabular}{l|l}
+%         \hline
+%         Tham số     &   Mô tả
+%         \hline
+%         $\sigma_1$  &   Hoạt động xóa-chèn cuối cùng dẫn đến một giải pháp mới tốt nhất trong phạm vi toàn cục.
+%         $\sigma_2$  &   Thao tác xóa-chèn cuối cùng dẫn đến một giải pháp chưa được chấp nhận trước đó. Chi phí của giải pháp mới tốt hơn chi phí của giải pháp hiện tại.
+%         $\sigma_3$  &   Thao tác xóa-chèn cuối cùng dẫn đến một giải pháp chưa được chấp nhận trước đó. Chi phí của giải pháp mới tồi tệ hơn chi phí của giải pháp hiện tại, nhưng giải pháp đã được chấp nhận.
+%         \hline
+%     \end{tabular}
+%     \caption{Caption}
+% \end{table}
+
+Trong mỗi vòng lặp, chúng tôi áp dụng 2 heuristic: xóa và chèn. Các điểm số cho cả 2 phương pháp heuristic được cập nhật cùng 1 lượng, vì ta không thể biết chắc chắn sự tốt lên của thuật toán là do phương thức xóa hay chèn.
+
+Tại mỗi lần kết thúc 1 bước, ta tính toán lại trọng số mới sử dụng các điểm số cũ. Cho $\omega_{ij}$ là trọng số của heuristic \textit{i} được sử dụng tại bước \textit{j} với trọng số như trong công thức 3.3. Trong bước đầu tiên, ta đánh trọng số các heuristic bằng nhau. Sau đó, khi bước \textit{j} kết thúc, ta tính toán trọng số cho tất cả heuristic \textit{i} để sử dụng cho bước thứ \textit{j} + 1 như sau:
+\begin{equation}
+    \omega_{i, j+1} = \omega_{ij}(1-r)+r\frac{\pi_i}{\theta_i}
+\end{equation}
+Trong đó, $\pi_i$ là điểm số của heuristic \textit{i} được nhận trong bước cuối cùng, $\theta_i$ là số lần ta cố gắng sử dụng heuristic \textit{i} trong bước thực hiện đó. \textit{Reaction factor - r} điều khiển cách trọng số điều chỉnh nhanh hay chậm, phản ứng với sự thay đổi của độ hiệu quả của thuật toán. Nếu \textit{r} = 0 thì ta không sử dụng điểm và các trọng số sẽ không đổi. Nếu \textit{r} = 1 thì điểm đánh giá được nhận trong lần thực hiện cuối cùng sẽ quyết định trọng số.
+
+% Vị trí hình 1
+
+Hình 1 cho thấy cách các trọng số của 3 heuristic xóa biến đổi theo thời gian khi giải quyết 1 bài toán. Biểu đồ giảm dần vì các tiêu chí mô phỏng chỉ chấp nhận các nước di tốt, do đó heuristic khó đạt điểm cao.
