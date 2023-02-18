@@ -8,18 +8,25 @@ Heuristic tiềm năng dựa trên \textit{large neighbourhood search (LNS)}, đ
 Mã giả cho một LNS heuristic tối thiểu được trình bày trong Algorithm 1
 
 \begin{algorithm}
-	\caption{PPO} 
+	\caption{LNS Heuristic} 
 	\begin{algorithmic}[1]
-		\For {$iteration=1,2,\ldots$}
-			\For {$actor=1,2,\ldots,N$}
-				\State Run policy $\pi_{\theta_{old}}$ in environment for $T$ time steps
-				\State Compute advantage estimates $\hat{A}_{1},\ldots,\hat{A}_{T}$
-			\EndFor
-			\State Optimize surrogate $L$ wrt. $\theta$, with $K$ epochs and minibatch size $M\leq NT$
-			\State $\theta_{old}\leftarrow\theta$
-		\EndFor
+        \Require $s \in {solutions}, q \in \mathbb{N}$
+        \State solution $s_{best} = s$;
+				\Repeat
+					\State $s'=s$;
+					\State remove $q$ requests from $s'$;
+					\State reinsert removed requests into $s'$;
+					\If{$f(s') < f(s)$}
+						\State $s_{best} = s'$;
+					\EndIf
+					\If{$accept(s',s)$}
+						\State $s=s'$;
+					\EndIf
+				\Until{stop-criterion met}\\
+				\Return $s_{best}$;
 	\end{algorithmic} 
 \end{algorithm}
+
 Thuật toán giả định rằng lời giải ban đầu \textit{s} đã có ví dụ được tạo bằng một heuristic đơn giản. Tham số thứ 2 \textit{q} xác định phạm vi tìm kiếm. 
 
 Dòng 5 và 6 của thuật toán là phần thú vị của heuristic. Ở dòng 5, một số yêu cầu được loại bỏ khỏi phương án hiện tại \textit{s'}, các yêu cầu lại được thêm vào ở dòng 6. Hiệu năng cũng như sự mạnh mẽ của heuristic phụ thuộc vào sự lựa chọn chiến thuật bỏ và thêm lại các yêu cầu. Trong các bài trước đó về LNS cho VRPTW và PDPTW (Shaw 1997; Bent and Van Hentenryck 2003a) các phương pháp \textit{gần tối ưu} được sử dụng để thêm lại các yêu cầu. Trong bài báo này, tác giả tiếp cận kiểu khác bằng cách sử dụng các cách mẹo thêm lại yêu cầu đơn giản. Mặc dù các cách thêm lại yêu cầu heuristic thường có chất lượng kém, nhưng chất lượng của LNS heurustic lại rất tốt, bởi vì các bước xấu được tạo ra bởi heuristic thêm lại yêu cầu dẫn đến sự đa dạng hóa hiệu quả của quá trình tìm kiếm. 
