@@ -8,19 +8,16 @@ Bộ điều chỉnh của chúng tôi bao gồm 16 trường hợp. Bốn trư�
 \section{Đánh giá kiến trúc heuristic}
 Đầu tiên, chúng tôi kiểm tra xem các kiến trúc heuristic đơn giản từ Phần 3.2 thực hiện như thế nào đối với các vấn đề điều chỉnh, để xem chúng hoạt động tốt đến mức nào khi không có khung LNS. Các kiến trúc heuristic regret-1, regret-2, regret-3, regret-4 và regret-m đã được triển khai. Bảng 2 trình bày kết quả của thử nghiệm. Vì các kiến trúc heuristic mang tính xác định, các kết quả được tạo ra bằng cách áp dụng các phỏng đoán cho từng vấn đề trong số 16 vấn đề được thử nghiệm.
 
-\begin{table}
-    \caption{Performance of Construction Heuristics}
-    \begin{tabular}{c c c c c c} 
-        \hline 
-        & Basic greedy & Regret-2 & Regret-3 & Regret-4 & Regret-m\\ [0.5ex] 
-        \hline 
-        Avg.gap (\%) & 40.7 & 30.3 & 26.3 & 26.0 & 27.7 \\ 
-        Fails & 3 & 3 & 3 & 2 & 0 \\
-        Time (s) & 0.02 & 0.02 & 0.02 & 0.02 & 0.03 \\ [1ex] 
-        \hline 
-    \end{tabular}
-    \\ [1ex] 
-    \caption{ \textit{Ghi chú: Mỗi cột trong bảng tương ứng với một trong các contruction heuristic. Những kinh nghiệm đơn giản này không phải lúc nào cũng có thể xây dựng một giải pháp trong đó tất cả các yêu cầu đều được đáp ứng; do đó, đối với mỗi heuristic, chúng tôi báo cáo số lần mà điều này xảy ra trong hàng "lỗi". Hàng Avg.gap hiển thị sự khác biệt tương đối trung bình giữa giải pháp được tìm thấy và giải pháp được biết đến nhiều nhất. Chỉ những giải pháp mà tất cả các yêu cầu đều được đáp ứng mới được đưa vào tính toán Avg.gap. Hàng cuối cùng hiển thị thời gian trung bình (tính bằng giây) cần thiết để áp dụng heuristic cho một vấn đề, chạy trên Pentium IV 1.5 GHz.}}
+\begin{table}[caption={Performance of Construction Heuristics}, label=tab:2]
+    \begin{tabular}{@{}llllll@{}}
+        \toprule
+                      & Basic gredy & Regret-2 & Regret-3 & Regret-4 & Regret-m \\ \midrule
+        Avg. gap (\%) & 40.7        & 30.3     & 26.3     & 26.0     & 27.7     \\
+        Fails         & 3           & 3        & 3        & 2        & 0        \\
+        Time (s)      & 0.02        & 0.02     & 0.02     & 0.02     & 0.03     \\ \bottomrule
+        \end{tabular} \\
+        \justify
+        \textit{Ghi chú: Mỗi cột trong bảng tương ứng với một trong các contruction heuristic. Những kinh nghiệm đơn giản này không phải lúc nào cũng có thể xây dựng một giải pháp trong đó tất cả các yêu cầu đều được đáp ứng; do đó, đối với mỗi heuristic, chúng tôi báo cáo số lần mà điều này xảy ra trong hàng "lỗi". Hàng Avg.gap hiển thị sự khác biệt tương đối trung bình giữa giải pháp được tìm thấy và giải pháp được biết đến nhiều nhất. Chỉ những giải pháp mà tất cả các yêu cầu đều được đáp ứng mới được đưa vào tính toán Avg.gap. Hàng cuối cùng hiển thị thời gian trung bình (tính bằng giây) cần thiết để áp dụng heuristic cho một vấn đề, chạy trên Pentium IV 1.5 GHz.}
 \end{table}
 
 Kết quả cho thấy các kiến trúc heuristic được đề xuất rất nhanh nhưng cũng rất không chính xác. Thuật toán tham lam cơ bản có phỏng đoán tồi tệ nhất, trong khi tất cả các regret heuristics đều có thể so sánh được với giải pháp chất lượng. Tuy nhiên, regret-m lại nổi bật lên vì nó có thể đáp ứng mọi yêu cầu trong mọi vấn đề. Có lẽ có thể cải thiện các kết quả thể hiện trong Bảng 2 bằng cách đưa ra các yêu cầu hạt giống (seed requests) như đề xuất của Solomon (1987). Tuy nhiên, chúng tôi sẽ không báo cáo về các thí nghiệm như vậy trong bài báo này. Có thể khá bất ngờ khi những phỏng đoán rất không chính xác này có thể được sử dụng làm nền tảng cho một phỏng đoán tìm kiếm cục bộ chính xác hơn nhiều, nhưng như chúng ta sẽ thấy trong các phần sau rằng điều này thực sự có thể xảy ra.
@@ -39,18 +36,19 @@ Mặc dù một lượng lớn tham số được sử dụng trong ALNS heurist
 Một trong những thử nghiệm được thực hiện trong quá trình điều chỉnh tham số nhằm xác định giá trị của tham số $\zeta$, điều này kiểm soát số lượng yêu cầu được loại bỏ trong mỗi lần lặp. Thông số này về mặt trực giác sẽ có tác động đáng kể đến các kết quả mà phương pháp phỏng đoán của chúng ta có thể tạo ra. Chúng tôi đã thử nghiệm phỏng đoán với $\zeta$ nằm trong phạm vi từ 0.05 đến 0.5 với độ dài bước là 0.05. Bảng 3 cho thấy ảnh hưởng của $\zeta$.  Khi $\zeta$ quá thấp, phỏng đoán sẽ không thể đi xa trong mỗi lần lặp và sẽ có nhiều khả năng bị mắc kẹt trong một khu vực dưới mức tối ưu của không gian tìm kiếm. Mặt khác, nếu $\zeta$ lớn, thì chúng ta có thể dễ dàng di chuyển trong không gian tìm kiếm, nhưng chúng ta cũng đang mở rộng khả năng của phương pháp phỏng đoán chèn của mình. Các phỏng đoán chèn hoạt động khá tốt khi chúng phải chèn một số lượng yêu cầu hạn chế vào một phần giải pháp, nhưng chúng không thể xây dựng một giải pháp tốt từ đầu, như đã thấy trong Phần 4.2. Kết quả ở bảng 3 cho thấy theta = 04 là một lựa chọn tốt. Cần lưu ý rằng phỏng đoán sẽ chậm hơn khi tăng theta vì việc xóa và chèn mất nhiều thời gian hơn khi có nhiều yêu cầu hơn; do đó, sự so sánh trong Bảng 3 là không hoàn toàn công bằng.
 
 
-\begin{table}
-    \caption[]{Parameter $\zeta$ vs. Solution Quality}
-    %\centering
+\begin{longtable}[c]{l}
+	\resizebox{\textwidth}{!}{
+    % \caption[]{Parameter $\zeta$ vs. Solution Quality}
+    \centering
     \begin{tabular}{c c c c c c c c c c c} 
         \hline
         $\zeta$ & 0.05 & 0.1 & 0.15 & 0.2 & 0.25 & 0.3 & 0.35 & 0.4 & 0.45 & 0.5 \\
         Avg.gap (\%) & 1.75 & 1.65 & 1.21 & 0.97 & 0.81 & 0.71 & 0.81 & 0.49 & 0.57 & 0.57 \\ [1ex]
         \hline 
-    \end{tabular}
+    \end{tabular}} \\
     \\ [1ex]
-    \caption*{ \textit{Ghi chú: Hàng đầu tiên hiển thị Các giá trị Của tham số $\zeta$ đã được kiểm tra và hàng thứ hai hiển thị khoảng cáCh giữa giải pháp trung bình thu được và giải pháp tốt nhất được tạo ra trong thử nghiệm.}}   
-\end{table}
+    \caption*[]{ \textit{Ghi chú: Hàng đầu tiên hiển thị Các giá trị Của tham số $\zeta$ đã được kiểm tra và hàng thứ hai hiển thị khoảng cáCh giữa giải pháp trung bình thu được và giải pháp tốt nhất được tạo ra trong thử nghiệm.}}   
+\end{longtable}
 
 Việc điều chỉnh tham số hoàn chỉnh dẫn đến vectơ tham số sau:
 
@@ -161,15 +159,15 @@ Phần này so sánh các phương pháp ALNS heuristics với các phương ph�
 \end{center}
 
 
-\begin{center}
-    \begin{figure}[htp]
-    \caption{So sánh với các giải pháp được biết đến nhiều nhất trước đây}        
-    \begin{center}
-     \includegraphics[scale=.5]{figures/Thuy_table9}
-    \end{center}
-  \textit{Ghi Chú: Bảng được nhóm theo quy mô vấn đề. Cột đầu tiên hiển thị quy mô vấn đề; cột tiếp theo hiển thị số vấn đề có kích thước đó. Hai cột tiếp theo cung cấp thông tin bổ sung về thử nghiệm trong đó phương pháp ALNS heuristics được áp dụng 5 hoặc 10 lần cho mỗi trường hợp. Các cột < PB báo cáo số lần giải pháp tốt nhất được tìm ra bởi ALNS heuristic tốt hơn hoàn toàn so với giải pháp tốt nhất đã biết trước đó. Các cột ≤ PB cho biết giải pháp tốt nhất do ALNS tìm thấy ít nhất tốt bằng giải pháp tốt nhất đã biết trước đây. Hai cột cuối cùng hiển thị thông tin về các giải pháp tốt nhất thu được trong quá trình thử nghiệm với các cài đặt tham số khác nhau.}
-    \end{figure}
-\end{center}
+% \begin{center}
+%     \begin{figure}[htp]
+%     \caption{So sánh với các giải pháp được biết đến nhiều nhất trước đây}        
+%     \begin{center}
+%      \includegraphics[scale=.5]{figures/Thuy_table9}
+%     \end{center}
+%   \textit{Ghi Chú: Bảng được nhóm theo quy mô vấn đề. Cột đầu tiên hiển thị quy mô vấn đề; cột tiếp theo hiển thị số vấn đề có kích thước đó. Hai cột tiếp theo cung cấp thông tin bổ sung về thử nghiệm trong đó phương pháp ALNS heuristics được áp dụng 5 hoặc 10 lần cho mỗi trường hợp. Các cột < PB báo cáo số lần giải pháp tốt nhất được tìm ra bởi ALNS heuristic tốt hơn hoàn toàn so với giải pháp tốt nhất đã biết trước đó. Các cột ≤ PB cho biết giải pháp tốt nhất do ALNS tìm thấy ít nhất tốt bằng giải pháp tốt nhất đã biết trước đây. Hai cột cuối cùng hiển thị thông tin về các giải pháp tốt nhất thu được trong quá trình thử nghiệm với các cài đặt tham số khác nhau.}
+%     \end{figure}
+% \end{center}
 
 
 \begin{center}
