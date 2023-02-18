@@ -20,26 +20,26 @@ Mức độ liên quan được sử dụng để loại bỏ các yêu cầu tr
 	\caption{Shaw Removal} 
 	\begin{algorithmic}[1]
         \Require $s \in {solutions}, q \in \mathbb{N}, p \in \mathbb{R}_{+}$
-        \State request: r=a randomly selected request from s;
-        \State set of requests: D={r};
+        \State request: r = a randomly selected request from s;
+        \State set of requests: $\mathbb{D}=\{r\}$;
         \While {$|\mathbb{D}| < q$}
 		  \State r = a randomly selected request from $\mathbb{D}$;
             \State Array: L = an array containing all request from s not in $\mathbb{D}$;
             \State sort \textit{L} such that $i<j \Rightarrow R(r, L\left[ i \right]) < R(r, L\left[ j \right])$;
             \State choose a random number \textit{y} from the interval [0, 1);
-            \State $D=D\cup {L \left[ y^p|L| \right]}$
+            \State $\mathbb{D}=\mathbb{D}\cup {L \left[ y^p|L| \right]}$
         \EndWhile
-    \State remove the requests in \textit{D} from \textit{s};
+    \State remove the requests in $\mathbb{D}$ from \textit{s};
 	\end{algorithmic} 
 \end{algorithm}
 
-Lưu ý rằng việc sắp xếp tại dòng 7 có thể lược bỏ được trong quá trình triển khai thuật toán thực tế vì chỉ cần sử dụng thuật toán chọn thời gian tuyến tính (Cormen và nhóm tác giả 2001) trong dòng 9 là đủ.
+Lưu ý rằng việc sắp xếp tại dòng 6 có thể lược bỏ được trong quá trình triển khai thuật toán thực tế vì chỉ cần sử dụng thuật toán chọn thời gian tuyến tính (Cormen và nhóm tác giả 2001) trong dòng 8 là đủ.
 
 \subsection{Phương pháp xóa ngẫu nhiên}
-Thuật toán xóa ngẫu nhiên đơn giản chọn ngẫu nhiên \textit{q} yêu cầu và loại bỏ chúng từ tập giải pháp. Kỹ thuật này có thể coi là 1 trường hợp đặc biệt của phương pháp xóa Shaw với \textit{p}=1. Tuy nhiên, chúng tôi đã cài đặt 1 kỹ thuật riêng biệt nhanh hơn
+Thuật toán xóa ngẫu nhiên đơn giản chọn ngẫu nhiên \textit{q} yêu cầu và loại bỏ chúng từ tập phương án. Kỹ thuật này có thể coi là 1 trường hợp đặc biệt của phương pháp xóa Shaw với \textit{p}=1. Tuy nhiên, tác giả đã cài đặt 1 kỹ thuật riêng biệt nhanh hơn.
 
 \subsection{Phương pháp xóa tệ nhất}
-Cho 1 yêu cầu \textit{i} được phục vụ bởi vài phương tiện trong tập giải pháp \textit{s}, chúng tôi định nghĩa chi phí của yêu cầu \textit{cost} như sau: $cost(i,s)=f(s)-f_{-i}(s)$ với $f_{-i}(s)$ là chi phí của giải pháp mà không có yêu cầu i (yêu cầu được xóa mà không chuyển đến hàng chờ). Nó có vẻ hợp lý khi cố gắng xóa các yêu cầu với chi phí cao và thêm chúng vào vị trí khác trong tập giải pháp để có được phương pháp tốt hơn. Vì vậy, chúng tôi đề xuất 1 kỹ thuật xóa các yêu cầu có chi phí $cost(i, s)$ cao.
+Cho 1 yêu cầu \textit{i} được phục vụ bởi vài phương tiện trong tập phương án \textit{s}, tác giả định nghĩa chi phí của yêu cầu \textit{cost} như sau: $cost(i,s)=f(s)-f_{-i}(s)$ với $f_{-i}(s)$ là chi phí của phương án mà không có yêu cầu i (yêu cầu được xóa mà không chuyển đến hàng chờ). Nó có vẻ hợp lý khi cố gắng xóa các yêu cầu với chi phí cao và thêm chúng vào vị trí khác trong tập phương án để có được phương án tốt hơn. Vì vậy, tác giả đề xuất 1 kỹ thuật xóa các yêu cầu có chi phí $cost(i, s)$ cao.
 
 Phương pháp này được biểu diễn trong Algorithm 3. Nó sử dụng lại vài ý tưởng từ Phần 3.1.1.
 
@@ -50,8 +50,8 @@ Lưu ý rằng việc thực hiện xóa là ngẫu nhiên, với mức độ ng
 	\begin{algorithmic}[1]
         \Require $s \in {solutions}, q \in \mathbb{N}, p \in \mathbb{R}_{+}$
         \While {$q > 0$}
-		  \State Array: \textit{L} = All planned requests \textit{i}, sorted by descending \textit{cost(i,s};
-            \State choose a random number \textit{y} in the interval [0, 1);
+		  \State Array: \textit{L} = All planned requests \textit{i}, sorted by descending \textit{cost(i,s)};
+            \State choose a random number \textit{y} in the interval $[0, 1)$;
             \State request: $r = L\left[ y^p |L| \right]$;
             \State remove r from solution s;
             \State $q = q-1$;
@@ -59,4 +59,4 @@ Lưu ý rằng việc thực hiện xóa là ngẫu nhiên, với mức độ ng
 	\end{algorithmic} 
 \end{algorithm}
 
-Có thể nói rằng phương pháp xóa Shaw và phương pháp xóa tệ nhất thuộc về 2 trường phái khác nhau. Phương pháp của Shaw thiên về chọn các yêu cầu dễ dàng trao đổi, trong khi đó phương pháp xóa tệ nhất lựa chọn yêu cầu dường như được đặt vào vị trí sai trong tập giải pháp.
+Có thể nói rằng phương pháp xóa Shaw và phương pháp xóa tệ nhất thuộc về 2 trường phái khác nhau. Phương pháp của Shaw thiên về chọn các yêu cầu dễ dàng trao đổi, trong khi đó phương pháp xóa tệ nhất lựa chọn yêu cầu dường như được đặt vào vị trí sai trong tập phương án.
