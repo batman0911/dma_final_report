@@ -1,42 +1,42 @@
 \chapter{Mô hình toán học}
-Phần này trình bày một mô hình toán học của bài toán; nó dựa trên mô hình được đề xuất bởi Desaulniers et al. (2002). Mô hình toán học phục vụ như một mô tả chính thức của vấn đề. Khi chúng ta giải bài toán heuristically, chúng ta không cố gắng viết mô hình ở dạng integer-linear.
+Phần này trình bày một mô hình toán học của bài toán dựa trên mô hình được đề xuất bởi Desaulniers et al. (2002). Mô hình toán học được coi như một mô tả chính thức của bài toán. Khi giải bài toán bằng phương pháp heuristic, chúng ta sẽ không cố để viết mô hình dưới dạng tuyến tính nguyên (integer-linear).
 
-Một ví dụ về bài toán nhận và giao hàng chứa n yêu cầu và m phương tiện. Bài toán được xác định trên đồ thị, \textit{P = \{1+,...,n\}} là tập các nút đón, \textit{D=\{n+1,...,2n\}} là tập hợp các nút phân phối. Yêu cầu i được đại diện bởi các nút i và i + n. K là tập hợp tất cả các phương tiện \textit{|K|=m}. Một phương tiện có thể không phục vụ được tất cả các yêu cầu; chẳng hạn, một yêu cầu có thể yêu cầu xe phải có ngăn cấp đông.
-$K_i$ là tập hợp các phương tiện có khả năng phục vụ yêu cầu i, và $P_k \subseteq P$ và $D_k \subseteq D$ lần lượt là tập hợp các hoạt động nhận hàng và giao hàng có thể được phục vụ bởi phương tiện k; do đó với tất cả phương tiện i và k: $k \in K_i \Leftrightarrow i \in P_k \land i \in D_k $. Yêu cầu mà $K_i \ne K$ được gọi là \textit{special requests}. Xác định $N = P \cup D$ và $N_k = P_k \cup D_k$. Cho $\tau_k = 2n +k, k \in K$, và cho $\acute{\tau_k} = 2n + m +k, k \in K$ lần lượt là các nút đại diện cho bến đầu và bến cuối của xe k. 
-Đồ thị $G = (V,A)$ bao gồm các nút $V= N \cup \{ \tau_1,...,\tau_m\} \cup \{\acute{\tau_1},...,\acute{\tau_m}\}$ và các cung $A = V \times V$. Mỗi phương tiên, chúng ta có một đồ thị con $G_k = (V_k, A_k)$, với $V_k = N_k \cup \{\tau_k\} \cup \{\acute{\tau_k}\}$ và $A_k =V_k \times V_k$. Với mỗi cạnh $(i, j) \in A$ chúng ta gán khoảng cách $d_{ij} \geq 0$ và thời gian di chuyển $t_{ij} \geq 0$. Giả sử rằng khoảng cách và thời gian là không âm; $d_{ij} \geq 0, t_{ij} \geq 0$ và số lần thỏa mãn bất đẳng thức tam giác; $dt_{ij} \leq t_{il} + t_{lj}$ với mọi $i, j, l \in V$.
-Để mô hình hóa, chúng ta cũng giả sử rằng $t_{i,n+i} + s_i > 0$; điều này làm cho việc loại bỏ các chuyến phụ và ràng buộc nhận hàng trước khi giao hàng trở nên dễ dàng để mô hình hóa.
+Một bài toán lấy và giao hàng chứa $n$ yêu cầu và $m$ xe. Bài toán được xác định trên đồ thị, $P = \{1,...,n\}$ là tập các nút lấy, $D=\{n+1,...,2n\}$ là tập hợp các nút giao. Yêu cầu i được đại diện bởi các nút $i$ và $i + n$. $K$ là tập hợp tất cả các xe, $|K|=m$. Một xe có thể không phục vụ được tất cả các yêu cầu; một yêu cầu có thể yêu cầu xe phải đáp ứng điều kiện đặc biệt, chẳng hạn như có ngăn cấp đông. $K_i$ là tập hợp các xe có khả năng phục vụ yêu cầu i, và $P_k \subseteq P$ và $D_k \subseteq D$ lần lượt là tập hợp các hoạt động lấy hàng và giao hàng có thể được thực hiện bởi phương tiện k; do đó với mọi i và k: $k \in K_i \Leftrightarrow i \in P_k \land i \in D_k $. Yêu cầu mà $K_i \ne K$ được gọi là \textit{yêu cầu đặc biệt} (special requests). Đặt $N = P \cup D$ và $N_k = P_k \cup D_k$. Đặt $\tau_k = 2n +k, k \in K$, và đặt $\acute{\tau_k} = 2n + m +k, k \in K$ lần lượt là các nút đại diện cho bến đầu và bến cuối của xe k. 
+Đồ thị $G = (V,A)$ bao gồm các nút $V= N \cup \{ \tau_1,...,\tau_m\} \cup \{\acute{\tau_1},...,\acute{\tau_m}\}$ và các cung $A = V \times V$. Mỗi phương tiện, chúng ta có một đồ thị con $G_k = (V_k, A_k)$, với $V_k = N_k \cup \{\tau_k\} \cup \{\acute{\tau_k}\}$ và $A_k =V_k \times V_k$. Với mỗi cạnh $(i, j) \in A$ chúng ta gán khoảng cách $d_{ij} \geq 0$ và thời gian di chuyển $t_{ij} \geq 0$. Giả sử rằng khoảng cách và thời gian là không âm; $d_{ij} \geq 0, t_{ij} \geq 0$ và số lần thỏa mãn bất đẳng thức tam giác; $t_{ij} \leq t_{il} + t_{lj}$ với mọi $i, j, l \in V$.
+Để mô hình hóa, chúng ta cũng giả sử rằng $t_{i,n+i} + s_i > 0$; điều này làm cho việc loại bỏ các tuyến phụ và ràng buộc nhận hàng trước khi giao hàng trở nên dễ dàng để mô hình hóa.
 
-Mỗi nút $i \in V$ có thời gian phục vụ $s_i$ và thời gian ràng buộc $[a_i, b_i]$ . Thời gian phục vụ thể hiện thời gian cần thiết để bốc dỡ hàng và thời gian ràng buộc cho biết khi nào chuyến thăm địa điểm cụ thể phải bắt đầu; một lần truy cập vào nút i chỉ có thể diễn ra giữa thời gian $a_i$ và $b_i$. Một phương tiện được phép đến một địa điểm trước khi bắt đầu thời gian ràng buộc, nhưng nó phải đợi cho đến khi bắt đầu thời gian ràng buộc trước khi chuyến thăm có thể được thực hiện. Với mỗi nút $i \in N, l_i$ là số lượng hàng hoá phải trất lên phương tiện tại nút cụ thể, $l_i \geq 0$ với $i \in P$ và $l_i = -l_{i-n}$ với $i \in D$. Công suất của mỗi phương tiện $k \in K$ ký hiệu là $C_k$.
+Mỗi nút $i \in V$ có thời gian phục vụ $s_i$ và thời gian ràng buộc $[a_i, b_i]$ . Thời gian phục vụ thể hiện thời gian cần thiết để bốc dỡ hàng và thời gian ràng buộc cho biết khi nào chuyến đi tới một địa điểm cụ thể phải bắt đầu; một lần đến nút i chỉ có thể diễn ra giữa thời gian $a_i$ và $b_i$. Một xe được phép đến địa điểm trước khi bắt đầu thời gian ràng buộc, nhưng nó phải đợi cho đến khi bắt đầu thời gian ràng buộc mới có thể xuất phát. Với mỗi nút $i \in N, l_i$ là số lượng hàng hoá phải chất lên xe, $l_i \geq 0$ với $i \in P$ và $l_i = -l_{i-n}$ với $i \in D$. Công suất của mỗi xe $k \in K$ ký hiệu là $C_k$.
 
-Bốn loại biến quyết định được sử dụng trong mô hình toán học. $x_{ijk}, i, j \in V, k \in K$ là một biến nhị phân là 1 nếu cạnh giữa nút i và nút j được sử dụng bởi xe k và 0 nếu ngược lại. 
-$S_{ik}, i \in V, k \in K$ là một số nguyên không âm cho biết thời điểm xe k bắt đầu dịch vụ tại địa điểm i, $L_{ik}, i \in V, k \in K$ là số nguyên không âm là cận trên của lượng hàng hóa trên xe k sau khi phục vụ tại nút i. $S_{ik}$ và $L_{ik}$ chỉ được xác định rõ khi xe k thực sự ghé qua nút i.
-Cuối cùng $z_i i \in P$ là biến nhị phân cho biết yêu cầu i có được đặt trong \textit{request bank} hay không. Biến là một nếu yêu cầu được đặt trong \textit{request bank} và bằng không nếu không.
+Bốn loại biến mang tính quyết định được sử dụng trong mô hình toán học. $x_{ijk}, i, j \in V$, và $k \in K$ là một biến nhị phân có giá trị bằng 1 nếu cạnh nối nút i và nút j được sử dụng bởi xe k và bằng 0 nếu ngược lại. 
+$S_{ik}, i \in V, k \in K$ là một số nguyên không âm cho biết thời điểm xe k bắt đầu phục vụ tại địa điểm $i, L_{ik}, i \in V, k \in K$ là số nguyên không âm là giới hạn trên của lượng hàng hóa trên xe k sau khi phục vụ tại nút i. $S_{ik}$ và $L_{ik}$ chỉ được xác định rõ ràng khi xe k thực sự ghé qua nút i.
+Cuối cùng $z_i, i \in P$ là biến nhị phân cho biết yêu cầu i có trong ngân hàng yêu cầu hay không. Giá trị của biến bằng 1 nếu yêu cầu có trong ngân hàng yêu cầu và bằng 0 nếu ngược lại.
+Mô hình toán học:
 
 \begin{equation} \label{eq1}
-    min \alpha \sum_{k \in K} \sum_{(i,j) \in A} d_{ij}x_{ijk} + \beta \sum_{k \in K}(S_{\acute{\tau_k},k}- \alpha_{\tau k}) + \gamma\sum_{i \in P}z_i 
+    \min{\alpha} \sum_{k \in K} \sum_{(i,j) \in A} d_{ij}x_{ijk} + \beta \sum_{k \in K}(S_{\acute{\tau_k},k}- \alpha_{\tau k}) + \gamma\sum_{i \in P}z_i 
 \end{equation}
-Trong đó:
+Với điều kiện:
 \begin{flalign}
     \label{ct:2} &\sum_{k \in K_i} \sum_{j \in N_k} x_{ijk} + z_i = 1 \quad\forall i \in P& \\ 
     \label{ct:3}&\sum_{j \in V_k} x_{ijk} - \sum_{j \in V_k} x_{j,n+i,k}=0 \quad \forall k \in K, \forall i \in P_k&\\
-    \label{ct:4}&\sum_{j \in P_k \cup \{\acute{\tau_k}\}}x_{\tau_k,j,k}=1 \quad \forall k \in K&\\
-    \label{ct:5}&\sum_{i \in D_k \cup \tau_k} x_{i,\acute{\tau_k},k}=1 \quad \forall k \in K&\\
+    \label{ct:4}&\sum_{j \in P_k \cup \{\tau'_k\}} x_{\tau_k,j,k}=1 \quad \forall k \in K&\\
+    \label{ct:5}&\sum_{i \in D_k \cup \{\tau_k\}} x_{i,\tau'_k,k}=1 \quad \forall k \in K&\\
     \label{ct:6}&\sum_{i \in V_k}x_{ijk}-\sum_{i \in V_k}x_{jik}=0\quad \forall k \in K, \forall j \in N_k&\\
     \label{ct:7}&x_{ijk}=1 \Rightarrow S_{ik}+s_i+t_{ij}<S_{jk}\quad \forall k \in K, \forall (i,j) \in A_k&\\
-    \label{ct:8}&a_i \geq S_{ik} \geq b_i \quad \forall k \in K, \forall i \in V_k&\\
-    \label{ct:9}&S_{ik}\geq S_{n+i} \quad \forall k \in K, \forall i \in P_k&\\
+    \label{ct:8}&a_i \leq S_{ik} \leq b_i \quad \forall k \in K, \forall i \in V_k&\\
+    \label{ct:9}&S_{ik}\leq S_{n+i,k} \quad \forall k \in K, \forall i \in P_k&\\
     \label{ct:10}&x_{ijk}=1 \Rightarrow L_{ik}+l_j \leq L_{jk} \quad \forall k \in K, \forall (i,j) \in A_k&\\
     \label{ct:11}&L_{ik}\leq C_k \quad \forall k \in K, \forall i \in V_k&\\
-    \label{ct:12}&L_{\tau_k k}=L_{\acute{\tau_k}k} \quad \forall k \in K&\\
+    \label{ct:12}&L_{\tau_k k}=L_{\tau'_kk} \quad \forall k \in K&\\
     \label{ct:13}&x_{ijk} \in \{0,1\} \quad \forall k \in K, \forall (i,j) \in A_k&\\
     \label{ct:14}&z_i \in \{0,1\} \quad \forall i \in P &\\
     \label{ct:15}&S_{ik} \geq 0 \quad \forall k \in K, \forall i \in V_k&\\
     \label{ct:16}&L_{ik} \geq 0 \quad \forall k \in K, \forall i \in V_k
 \end{flalign}
 
-Hàm mục tiêu giảm thiểu tổng trọng số của quãng đường đã đi, tổng thời gian mà mỗi phương tiện sử dụng và số lượng yêu cầu không được lên lịch.
+Hàm mục tiêu tối thiểu hóa tổng trọng số của quãng đường đã đi, tổng thời gian mà mỗi phương tiện sử dụng và số lượng yêu cầu không được lên kế hoạch.
 
-Ràng buộc (\ref{ct:2}) đảm bảo rằng mỗi địa điểm nhận được truy cập hoặc yêu cầu tương ứng được đặt trong ngân hàng yêu cầu. Ràng buộc (\ref{ct:3}) đảm bảo rằng địa điểm giao hàng được truy cập nếu địa điểm nhận hàng được truy cập và chuyến thăm đó được thực hiện bởi cùng một phương tiện. Các ràng buộc (\ref{ct:4}) và (\ref{ct:5}) đảm bảo rằng một phương tiện rời khỏi mọi bến đầu và một phương tiện đi vào mọi bến cuối. Cùng với ràng buộc (\ref{ct:6}), điều này đảm bảo rằng các đường dẫn liên tiếp giữa $\tau_k$ và $\acute{\tau_k}$ được hình thành cho mỗi $k \in K$.
+Ràng buộc (\ref{ct:2}) đảm bảo rằng mỗi địa điểm lấy hàng đều có xe đến hoặc yêu cầu tương ứng có trong ngân hàng yêu cầu. Ràng buộc (\ref{ct:3}) đảm bảo rằng địa điểm giao hàng sẽ có xe đến nếu đã có xe đến nơi lấy hàng tương ứng và hai chuyến thăm này được thực hiện bởi cùng một xe. Các ràng buộc (\ref{ct:4}) và (\ref{ct:5}) đảm bảo rằng một xe rời khỏi mọi bến đầu và một xe đi vào mọi bến cuối. Cùng với ràng buộc (\ref{ct:6}), điều này đảm bảo rằng các quãng đường liên tiếp giữa $\tau_k$ và $\tau'_k$ được hình thành cho mỗi $k \in K$.
 
-Các ràng buộc (\ref{ct:7}) và (\ref{ct:8}) đảm bảo rằng $S_ik$ được đặt chính xác dọc theo các con đường và các thời gian ràng buộc được tuân theo. Những ràng buộc này cũng làm cho các \textit{subtour} không thể thực hiện được.
-Ràng buộc (\ref{ct:9}) đảm bảo rằng mỗi lần lấy hàng xảy ra trước lần giao hàng tương ứng. Các ràng buộc (\ref{ct:10}), (\ref{ct:11}) và (\ref{ct:12}) đảm bảo rằng biến tải trọng được đặt chính xác dọc theo các con đường và các ràng buộc về sức chứa của các phương tiện được tuân thủ
+Các ràng buộc (\ref{ct:7}) và (\ref{ct:8}) đảm bảo rằng $S_{ik}$ được đặt chính xác dọc theo đường đi và thời gian ràng buộc được tuân thủ. Những ràng buộc này cũng làm cho các \textit{subtour} không thể thực hiện được.
+Ràng buộc (\ref{ct:9}) đảm bảo rằng mỗi lần lấy hàng diễn ra trước lần giao hàng tương ứng. Các ràng buộc (\ref{ct:10}), (\ref{ct:11}) và (\ref{ct:12}) đảm bảo rằng biến tải trọng được đặt chính xác dọc theo đường đi và các ràng buộc về sức chứa của các phương tiện được tuân thủ
