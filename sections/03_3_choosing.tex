@@ -1,4 +1,9 @@
 \section{Lựa chọn phương pháp xóa và chèn}
 Trong Phần 3.1, tác giả đã định nghĩa 3 phương pháp xóa (Shaw, ngẫu nhiên, tệ nhất) và trong Phần 3.2 đã định nghĩa 1 lớp các insertion heuristic. Ta có thể lựa chọn kết hợp 1 phương pháp xóa và 1 phương pháp thêm với nhau để phục vụ quá trình tìm kiếm, nhưng trong bài báo này, tác giả đề xuất sử dụng tất cả các phương pháp. Lý do cho việc này là reget-2 heuristic có thể phù hợp với trường hợp này nhưng reget-4 lại là lựa chọn tốt nhất cho trường hợp khác. Chúng tối tin rằng, sự thay thế giữa các phương pháp thêm và xóa sẽ đảm bảo cho sự bền vững và hiệu quả.
 
-Để lựa chọn phương pháp heuristic để sử dụng, tác giả gán trọng số cho các heuristic khác nhau và sử dụng một nguyên tắc bánh xe lựa chọn. Nếu có \textit{k} heuristic với trong số $\omega_i, i \in \{1,2,...,k\}$, ta chọn heuristic \textit{j} với xác suất: $\frac{\omega_j}{\sum_{i=1}^k \omega_i}$. Lưu ý rằng, thuật toán chèn được chọn độc lập với thuật toán xóa và ngược lại. Các trọng số này có thể được thiết lập bằng tay hoặc nó có thể là 1 quá trình phức tạp nếu sử dụng nhiều phương pháp xóa và chèn. Thay vào đó, 1 thuật toán điều chỉnh trọng số được trình bày trong Phần 3.4.
+Để lựa chọn phương pháp heuristic để sử dụng, tác giả gán trọng số cho các heuristic khác nhau và sử dụng một nguyên tắc bánh xe lựa chọn. Nếu có \textit{k} heuristic với trong số $\omega_i, i \in \{1,2,...,k\}$, ta chọn heuristic \textit{j} với xác suất:
+\begin{equation}
+  \frac{\omega_j}{\sum_{i=1}^k \omega_i}
+  \label{eq:20}
+\end{equation}
+Lưu ý rằng, thuật toán chèn được chọn độc lập với thuật toán xóa và ngược lại. Các trọng số này có thể được thiết lập bằng tay hoặc nó có thể là 1 quá trình phức tạp nếu sử dụng nhiều phương pháp xóa và chèn. Thay vào đó, 1 thuật toán điều chỉnh trọng số được trình bày trong Phần 3.4.
