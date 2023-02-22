@@ -1,6 +1,8 @@
 \section{Điều chỉnh trọng số tự động}
 Phần này trình bày cách các trọng số $\omega_i$ được giới thiệu trong Phần 3.3 có thể tự động điều chỉnh khi sử dụng phương pháp thống kê từ các vòng lặp trước. Ý tưởng chung là theo dõi 1 điểm số đại diện cho độ hiệu quả của thuật toán trong các vòng lặp gần đây. Điểm số này càng cao thì thuật toán càng hiệu quả. Cả quá trình tìm kiếm được chia thành nhiều bước. 1 bước là 1 số vòng lặp của ALNS heuristic; ở đây tác giả chọn 1 bước là 100 vòng lặp. Điểm số heuristic được đặt bằng 0 khi bắt đầu mỗi bước và được tăng thêm $\sigma_1, \sigma_2, \sigma_3$ tùy các trường hợp ghi trong Bảng \ref{tab:1}.
 
+Trong trường hợp $\sigma_1$ rõ ràng: Nếu một heuristic có thể tìm được một phương án tổng quan tốt nhất thì nó đã hoạt động tốt. Tương tự, Nếu heuristic  đã tìm thấy một phương án chưa từng được duyệt qua trước đó và được chấp nhận bởi điều kiện chấp nhận trong tìm kiếm ALNS thì heuristic đó thành công và thuật toán tìm kiếm lại tiếp tục. Có vẻ hợp lý để phân biệt giữa hai tình huống tương ứng với các tham số $\sigma_2$ và $\sigma_3$ vì chúng ta ưu tiên các heuristics có thể cải thiện phương án nhưng cũng không bỏ qua các heuristic có thể đa dạng hóa việc tìm kiếm, điều này liên quan đến $\sigma_3$. Cần nhấn mạnh rằng chúng ta chỉ cần quan tâm đến các phương án chưa được duyệt qua. Điều này khuyến khích heuristics có thể tìm ra những phần mới của không gian nghiệm. Chúng ta theo dõi các phương án đã được duyệt qua bằng các gán một khóa (\textit{hash key}) cho mỗi phương án và sắp xếp các khóa này trong một bảng băm (\textit{hash table}).
+
 \begin{table}[caption={Kết quả tốt nhất, 200 địa điểm}, label=tab:1]
     % \resizebox{\textwidth}{!}{
         % \begin{tabularx}{\linewidth}{@{}>{\bfseries}l@{\hspace{.5em}}X@{}}
@@ -14,20 +16,6 @@ Phần này trình bày cách các trọng số $\omega_i$ được giới thi�
             \hline
         \end{tabular} \\
 \end{table}
-
-% \begin{table}[]
-%     \centering
-%     \begin{tabular}{l|l}
-%         \hline
-%         Tham số     &   Mô tả
-%         \hline
-%         $\sigma_1$  &   Hoạt động xóa-chèn cuối cùng dẫn đến một giải pháp mới tốt nhất trong phạm vi toàn cục.
-%         $\sigma_2$  &   Thao tác xóa-chèn cuối cùng dẫn đến một giải pháp chưa được chấp nhận trước đó. Chi phí của giải pháp mới tốt hơn chi phí của giải pháp hiện tại.
-%         $\sigma_3$  &   Thao tác xóa-chèn cuối cùng dẫn đến một giải pháp chưa được chấp nhận trước đó. Chi phí của giải pháp mới tồi tệ hơn chi phí của giải pháp hiện tại, nhưng giải pháp đã được chấp nhận.
-%         \hline
-%     \end{tabular}
-%     \caption{Caption}
-% \end{table}
 
 Trong mỗi vòng lặp, tác giả áp dụng 2 heuristic: xóa và chèn. Các điểm số cho cả 2 phương pháp heuristic được cập nhật cùng 1 lượng, vì ta không thể biết chắc chắn sự tốt lên của thuật toán là do phương thức xóa hay chèn.
 
