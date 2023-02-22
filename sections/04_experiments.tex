@@ -1,60 +1,68 @@
 \chapter{Các thí nghiệm tính toán}
-Phần này sẽ mô tả về các thí nghiệm tính toán. Trước tiên, tác giả giới thiệu một tập hợp những sự điều chỉnh cấu hình trong Phần 4.1. Trong Phần 4.2, tác giả đánh giá hiệu suất của các kiến trúc heuristic được đề xuất trên những sự điều chỉnh cấu hình. Phần 4.3 mô tả cách điều chỉnh các tham số của ALNS heuristic và Phần 4.4 sẽ trình bày các kết quả thu được từ ALNS heuristic và ALNS heuristic đơn giản hơn.
+Phần này sẽ mô tả về các thí nghiệm tính toán. Trước tiên, tác giả giới thiệu một tập hợp những sự điều chỉnh cấu hình trong Phần 4.1. Trong Phần 4.2, tác giả đánh giá hiệu suất của các kiến trúc heuristic được đề xuất trên những sự điều chỉnh cấu hình. Phần 4.3 mô tả cách điều chỉnh các tham số của ALNS heuristic và Phần 4.4 sẽ trình bày các kết quả thu được từ ALNS heuristic và ALNS heuristic đơn giản hơn (simpler LNS heuristic).
 
 \section{Điều chỉnh cấu hình}
-Đầu tiên, xác định một tập hợp các trường hợp điều chỉnh cấu hình đại diện. Các trường hợp điều chỉnh phải có kích thước khá hạn chế vì tác giả muốn thực hiện nhiều thử nghiệm về các vấn đề cần điều chỉnh và bằng cách nào đó chúng phải liên quan đến các vấn đề mà phỏng đoán của tác giả đang nhắm tới. Trong trường hợp hiện tại, tác giả muốn giải quyết một số cấu hình điểm chuẩn tiêu chuẩn (standard benchmark instances) và một tập hợp các cấu hình mới được tạo ngẫu nhiên.
-Bộ điều chỉnh bao gồm 16 trường hợp. Bốn trường hợp đầu tiên là $LR1\_2\_1$, $LR202$, $LRC1\_2\_3$ và $LRC204$ từ bài toán điểm chuẩn của Li và Lim (2001), chứa từ 50 đến 100 yêu cầu. Số lượng phương tiện khả dụng đã được đặt nhiều hơn một so với số lượng mà Li và Lim đã báo cáo để giúp những phỏng đoán dễ dàng tìm ra giải pháp mà không cần yêu cầu trong ngân hàng yêu cầu. 12 phiên bản cuối cùng là các phiên bản được tạo ngẫu nhiên. Các trường hợp này bao gồm cả các vấn đề về một kho và nhiều kho và các vấn đề với các yêu cầu chỉ có thể được phục vụ bởi một tập hợp con của đội xe. Tất cả các vấn đề được tạo ngẫu nhiên chứa 50 yêu cầu.
-Đầu tiên, xác định một tập hợp các trường hợp điều chỉnh cấu hình đại diện. Các trường hợp điều chỉnh phải có kích thước khá hạn chế vì tác giả muốn thực hiện nhiều thử nghiệm về các vấn đề cần điều chỉnh và bằng cách nào đó chúng phải liên quan đến các vấn đề mà phỏng đoán của tác giả đang nhắm tới. Trong trường hợp hiện tại, tác giả muốn giải quyết một số cấu hình điểm chuẩn tiêu chuẩn (standard benchmark instances) và một tập hợp các cấu hình mới được tạo ngẫu nhiên.
-Bộ điều chỉnh của tác giả bao gồm 16 trường hợp. Bốn trường hợp đầu tiên là $LR1\_2\_1$, $LR202$, $LRC1\_2\_3$ và $LRC204$ từ bài toán điểm chuẩn của Li và Lim (2001), chứa từ 50 đến 100 yêu cầu. Số lượng phương tiện khả dụng đã được đặt nhiều hơn một so với số lượng mà Li và Lim đã báo cáo để giúp những phỏng đoán dễ dàng tìm ra giải pháp mà không cần yêu cầu trong ngân hàng yêu cầu. 12 phiên bản cuối cùng là các phiên bản được tạo ngẫu nhiên. Các trường hợp này bao gồm cả các vấn đề về một kho và nhiều kho và các vấn đề với các yêu cầu chỉ có thể được phục vụ bởi một tập hợp con của đội xe. Tất cả các vấn đề được tạo ngẫu nhiên chứa 50 yêu cầu.
+Đầu tiên, xác định một tập hợp các cấu hình điều chỉnh đại diện. Các cấu hình điều chỉnh này phải có kích thước khá hạn chế vì tác giả muốn thực hiện nhiều thử nghiệm về các bài toán chuyển đổi (tuning problems) và chúng phải liên quan theo một cách nào đó đến các bài toán mà phương pháp heuristic của tác giả đang nhắm tới. Trong trường hợp này, tác giả muốn giải quyết một số cấu hình benchmark tiêu chuẩn (standard benchmark instances) và một tập hợp các cấu hình mới được tạo ngẫu nhiên.
+
+Bộ điều chỉnh bao gồm 16 cấu hình. Bốn cấu hình đầu tiên là LR1\_2\_1, LR202, LRC1\_2\_3 và LRC204 từ bài toán benchmark của Li \& Lim (2001), chứa từ 50 đến 100 yêu cầu. Số lượng xe khả dụng đã được đặt nhiều hơn một so với số lượng mà Li \& Lim đã báo cáo, để giúp phương pháp heuristic dễ dàng tìm ra giải pháp mà không cần yêu cầu trong ngân hàng yêu cầu. 12 cấu hình cuối cùng được tạo ngẫu nhiên. Các cấu hình này bao gồm cả các bài toán về một kho và nhiều kho và các bài toán với các yêu cầu chỉ có thể được phục vụ bởi một tập hợp con của đội xe. Tất cả các bài toán được tạo ngẫu nhiên chứa 50 yêu cầu.
 
 \section{Đánh giá kiến trúc heuristic}
-Đầu tiên, tác giả kiểm tra xem các kiến trúc heuristic đơn giản từ Phần 3.2 hoạt động như thế nào đối với các vấn đề điều chỉnh, để xem chúng hoạt động tốt đến mức nào khi không có khung LNS. Các kiến trúc heuristic regret-1, regret-2, regret-3, regret-4 và regret-m đã được triển khai. Bảng 2 trình bày kết quả của thử nghiệm. Vì các kiến trúc heuristic mang tính xác định, các kết quả được tạo ra bằng cách áp dụng các phỏng đoán cho từng vấn đề trong số 16 vấn đề được thử nghiệm.
+Đầu tiên, tác giả kiểm tra xem các kiến trúc heuristic đơn giản từ Phần 3.2 hoạt động như thế nào đối với các bài toán điều chỉnh, để xem chúng hoạt động tốt đến mức nào khi không có khung LNS (LNS framework). Các kiến trúc heuristic regret-1, regret-2, regret-3, regret-4 và regret-m đã được triển khai. Bảng \ref{tab:4.1} trình bày kết quả của thử nghiệm. Vì các kiến trúc heuristic đã được xác định, các kết quả sẽ được tạo ra bằng cách áp dụng heuristic cho từng bài toán trong số 16 bài toán được thử nghiệm.
 
-\begin{table}[caption={Performance of Construction Heuristics}, label=tab:2]
+%Bảng 2
+\begin{table}[caption={Hiệu suất của Kiến trúc Heuristics}, label=tab:4.1]
     \begin{tabular}{@{}llllll@{}}
         \toprule
                       & Basic gredy & Regret-2 & Regret-3 & Regret-4 & Regret-m \\ \midrule
         Avg. gap (\%) & 40.7        & 30.3     & 26.3     & 26.0     & 27.7     \\
         Fails         & 3           & 3        & 3        & 2        & 0        \\
         Time (s)      & 0.02        & 0.02     & 0.02     & 0.02     & 0.03     \\ \bottomrule
-        \end{tabular} \\
-        \justify
-        \textit{Ghi chú: Mỗi cột trong bảng tương ứng với một trong các contruction heuristic. Những kinh nghiệm đơn giản này không phải lúc nào cũng có thể xây dựng một giải pháp trong đó tất cả các yêu cầu đều được đáp ứng; do đó, đối với mỗi heuristic, tác giả báo cáo số lần mà điều này xảy ra trong hàng "lỗi". Hàng Avg.gap hiển thị sự khác biệt tương đối trung bình giữa giải pháp được tìm thấy và giải pháp được biết đến nhiều nhất. Chỉ những giải pháp mà tất cả các yêu cầu đều được đáp ứng mới được đưa vào tính toán Avg.gap. Hàng cuối cùng hiển thị thời gian trung bình (tính bằng giây) cần thiết để áp dụng heuristic cho một vấn đề, chạy trên Pentium IV 1.5 GHz.}
+    \end{tabular} \\
+    \justify
+    \textit{Ghi chú: Mỗi cột trong bảng tương ứng với một trong các kiến trúc heuristic. Những heuristic đơn giản này không phải lúc nào cũng có thể xây dựng một giải pháp trong đó tất cả các yêu cầu đều được đáp ứng; do đó, đối với mỗi heuristic, tác giả báo cáo số lần mà điều này xảy ra trong hàng Lỗi (Fails). Hàng Avg.gap hiển thị sự khác biệt trung bình giữa giải pháp được tìm thấy và giải pháp được biết đến nhiều nhất. Chỉ những giải pháp mà tất cả các yêu cầu đều được đáp ứng mới được đưa vào tính toán Avg.gap. Hàng cuối cùng hiển thị thời gian trung bình (tính bằng giây) cần thiết để áp dụng heuristic cho một bài toán, chạy trên Pentium IV 1.5 GHz.}
 \end{table}
 
-Kết quả cho thấy các kiến trúc heuristic được đề xuất hoạt động rất nhanh nhưng cũng rất không chính xác. Thuật toán tham lam cơ bản có phỏng đoán tồi tệ nhất, trong khi tất cả các regret heuristics đều có thể so sánh được với giải pháp chất lượng. Tuy nhiên, regret-m lại nổi bật lên vì nó có thể đáp ứng mọi yêu cầu trong mọi vấn đề. Có lẽ có thể cải thiện các kết quả thể hiện trong Bảng 2 bằng cách đưa ra các yêu cầu hạt giống (seed requests) như đề xuất của Solomon (1987). Tuy nhiên, tác giả sẽ không báo cáo về các thí nghiệm như vậy trong bài báo này. Có thể khá bất ngờ khi những phỏng đoán rất không chính xác này có thể được sử dụng làm nền tảng cho một phỏng đoán tìm kiếm cục bộ chính xác hơn nhiều, nhưng chúng ta sẽ thấy trong các phần sau rằng điều này thực sự có thể xảy ra.
+
+
+Kết quả cho thấy các kiến trúc heuristic được đề xuất hoạt động rất nhanh nhưng cũng rất không chính xác. Thuật toán tham lam cơ bản có phỏng đoán tồi tệ nhất, trong khi tất cả các regret heuristics đều có thể so sánh được với giải pháp chất lượng. Tuy nhiên, regret-m lại nổi bật lên vì nó có thể đáp ứng mọi yêu cầu trong mọi bài toán. Có lẽ có thể cải thiện các kết quả thể hiện trong Bảng \ref{tab:4.1} bằng cách đưa ra các yêu cầu cốt lõi (seed requests) như đề xuất của Solomon (1987). Tuy nhiên, tác giả sẽ không báo cáo về các thí nghiệm như vậy trong bài báo này. Có thể khá bất ngờ khi những phỏng đoán rất không chính xác này có thể được sử dụng làm nền tảng cho một phỏng đoán tìm kiếm cục bộ có tính chính xác hơn nhiều, nhưng chúng ta sẽ thấy trong các phần sau rằng điều này thực sự có thể xảy ra.
 
 
 \section{Điều chỉnh tham số}
-Phần này của bài viết phục vụ hai mục đích. Đầu tiên là mô tả cách tìm thấy các tham số được sử dụng để tạo ra kết quả trong Phần 4.4. Tiếp theo, trình bày phần nào của phỏng đoán đóng góp nhiều nhất vào chất lượng giải pháp.
+Phần này của bài viết phục vụ hai mục đích. Đầu tiên là mô tả cách tìm ra các tham số được sử dụng để tạo ra kết quả trong Phần 4.4. Tiếp theo, trình bày phần nào của heuristic đóng góp nhiều nhất vào chất lượng giải pháp.
 
 \subsection{Các tham số}
-Phần này xác định các tham số cần được điều chỉnh. Đầu tiên tác giả xem xét các tham số loại bỏ. Shaw removal được kiểm soát bởi năm tham số: $\varphi, \chi, \psi, \omega$, và $p$, trong khi "worst removal" được kiểm soát bởi một tham số $p_{worst}$. Sự loại bỏ ngẫu nhiên sẽ không có tham số. Các heuristics thêm là tham số tự do khi tác giả đã chọn mức độ regret.
-Để kiểm soát các tiêu chí được chấp nhận, tác giả sử dụng hai tham số, $w$ và $c$. Thuật toán điều chỉnh trọng số được kiểm soát bởi bốn tham số: $\sigma_1$, $\sigma_2$, $\sigma_3$ và $r$. Cuối cùng, ta phải xác định độ nhiễu $\eta$ và a tham số $\zeta$ có tác dụng kiểm soát số lượng yêu cầu bị loại bỏ trong mỗi lần lặp. Trong mỗi lần lặp lại, tác giả đã chọn một số ngẫu nhiên $p$ thỏa mãn $4 \leq p \leq min(100, \zeta n)$, và xóa $p$ yêu cầu. Việc tìm kiếm được dừng lại sau 25.000 lần lặp LNS vì điều này dẫn đến sự đánh đổi hợp lý giữa thời gian và chất lượng.
+Phần này xác định các tham số cần được điều chỉnh. Đầu tiên tác giả xem xét các tham số loại bỏ. Phương pháp xóa Shaw được kiểm soát bởi năm tham số: $\varphi, \chi, \psi, \omega$, và $p$, trong khi phương pháp xóa tệ nhất (the worst removal) được kiểm soát bởi một tham số $p_{worst}$. Việc loại bỏ ngẫu nhiên sẽ không có tham số. Các heuristics chèn có tham số tự do khi tác giả đã chọn mức độ regret.
+Để kiểm soát các tiêu chí được chấp nhận, tác giả sử dụng hai tham số, $w$ và $c$. Thuật toán điều chỉnh trọng số được kiểm soát bởi bốn tham số: $\sigma_1, \sigma_2, \sigma_3$ và $r$. Cuối cùng, ta phải xác định độ nhiễu $\eta$ và a tham số $\zeta$ có tác dụng kiểm soát số lượng yêu cầu bị xóa đi trong mỗi lần lặp. Trong mỗi lần lặp, tác giả đã chọn một số ngẫu nhiên $p$ thỏa mãn $4 \leq p \leq min(100, \zeta n)$, và xóa $p$ yêu cầu. Việc tìm kiếm được dừng lại sau 25,000 lần lặp LNS vì điều này đem lại sự đánh đổi hợp lý giữa thời gian và chất lượng.
 
 \subsection{Điều chỉnh tham số LNS}
-Mặc dù một lượng lớn tham số được sử dụng trong ALNS heuristic, nhưng việc tìm ra một tập hợp các tham số hoạt động tốt cho một loạt các vấn đề lại tương đối dễ dàng. Tác giả sử dụng chiến lược sau để điều chỉnh các tham số: Đầu tiên, một bộ tham số hợp lý được tạo ra bởi giai đoạn thử và sai đặc biệt; bộ tham số này đã được tìm thấy trong khi phát triển phỏng đoán. Bộ tham số này được cải thiện trong giai đoạn thứ hai bằng cách cho phép một tham số nhận một số giá trị, trong khi các tham số còn lại được giữ cố định. Đối với mỗi bộ tham số, tác giả áp dụng phỏng đoán cho tập hợp các vấn đề cần kiểm tra của mình năm lần và hành vi trung bình tốt nhất sẽ được chọn (so sánh về độ lệch trung bình so với các giải pháp tốt nhất đã biết). Sau đó tác giả chuyển đến tham số tiếp theo, sử dụng các giá trị được tìm thấy và các giá tri từ tham số điều chỉnh ban đầu cho các tham số chưa được xem xét. Quá trình này tiếp tục cho đến khi tất cả các tham số đã được điều chỉnh. Mặc dù có thể sử dụng lại các tham số bằng cách sử dụng bộ tham số mới làm điểm bắt đầu để tối ưu hóa hơn nữa các tham số, nhưng tác giả đã dừng lại sau một lượt.
-Một trong những thử nghiệm được thực hiện trong quá trình điều chỉnh tham số nhằm xác định giá trị của tham số $\zeta$, điều này kiểm soát số lượng yêu cầu được loại bỏ trong mỗi lần lặp. Thông số này về mặt trực giác sẽ có tác động đáng kể đến các kết quả mà phương pháp phỏng đoán trong bài viết này có thể tạo ra. Tác giả đã thử nghiệm phỏng đoán với $\zeta$ nằm trong phạm vi từ 0.05 đến 0.5 với độ dài bước là 0.05. Bảng 3 cho thấy ảnh hưởng của $\zeta$.  Khi $\zeta$ quá thấp, phỏng đoán sẽ không thể đi xa trong mỗi lần lặp và sẽ có nhiều khả năng bị mắc kẹt trong một khu vực dưới mức tối ưu của không gian tìm kiếm. Mặt khác, nếu $\zeta$ lớn, thì ta có thể dễ dàng di chuyển trong không gian tìm kiếm, nhưng ta cũng đang mở rộng khả năng của phương pháp phỏng đoán chèn của mình. Các phỏng đoán chèn hoạt động khá tốt khi chúng phải chèn một số lượng yêu cầu hạn chế vào một phần giải pháp, nhưng chúng không thể xây dựng một giải pháp tốt từ đầu, như đã thấy trong Phần 4.2. Kết quả ở bảng 3 cho thấy theta = 04 là một lựa chọn tốt. Cần lưu ý rằng phỏng đoán sẽ chậm hơn khi tăng theta vì việc xóa và chèn mất nhiều thời gian hơn khi có nhiều yêu cầu hơn; do đó, sự so sánh trong Bảng 3 là không hoàn toàn công bằng.
-\begin{table}[caption={Parameter $\zeta$ vs. Solution Quality}, label=tab:2]
+Mặc dù một lượng lớn tham số được sử dụng trong LNS heuristic, nhưng việc tìm ra một tập hợp các tham số hoạt động tốt cho một loạt các bài toán lại tương đối dễ dàng. Tác giả sử dụng chiến lược sau để điều chỉnh các tham số: Đầu tiên, một bộ tham số hợp lý được tạo ra bởi giai đoạn thử và sai; bộ tham số này đã được tìm ra trong khi phát triển heuristic. Bộ tham số này được cải thiện trong giai đoạn thứ hai bằng cách cho phép một tham số nhận một số giá trị, trong khi các tham số còn lại được giữ nguyên. Đối với mỗi bộ tham số, tác giả áp dụng heuristic cho tập hợp các bài toán cần kiểm tra năm lần và kết quả trung bình tốt nhất sẽ được chọn (so sánh về độ lệch trung bình so với các giải pháp tốt nhất đã biết). Sau đó tác giả chuyển đến tham số tiếp theo, sử dụng các giá trị được tìm thấy và các giá tri từ tham số điều chỉnh ban đầu cho các tham số chưa được xét. Quá trình này tiếp tục cho đến khi tất cả các tham số đã được điều chỉnh. Mặc dù có thể tiếp tục xây dựng lại các tham số bằng cách sử dụng bộ tham số mới làm điểm bắt đầu để tối ưu hóa hơn nữa các tham số, nhưng tác giả đã dừng lại sau một lượt.
+Một trong những thử nghiệm được thực hiện trong quá trình điều chỉnh tham số nhằm xác định giá trị của tham số $\zeta$, tham số này kiểm soát số lượng yêu cầu bị xóa trong mỗi lần lặp. Tham số này về mặt trực giác sẽ có tác động đáng kể đến các kết quả mà phương pháp heuristic mà bài viết này có thể tạo ra. Tác giả đã thử nghiệm heuristic với $\zeta$ nằm trong phạm vi từ 0.05 đến 0.5 với độ dài bước là 0.05. Bảng \ref{tab:4.2} cho thấy ảnh hưởng của $\zeta$. Khi $\zeta$ quá thấp, heuristic sẽ không thể đi xa trong mỗi lần lặp và sẽ có nhiều khả năng bị mắc kẹt trong một khu vực dưới mức tối ưu của không gian tìm kiếm. Mặt khác, nếu $\zeta$ lớn, thì ta có thể dễ dàng di chuyển trong không gian tìm kiếm, nhưng ta cũng đang mở rộng khả năng của phương pháp heuristics chèn. Các heuristics chèn hoạt động khá tốt khi chúng phải thêm một số lượng yêu cầu hạn chế vào một phần giải pháp, nhưng chúng không thể xây dựng một giải pháp tốt từ đầu, như đã thấy trong Phần 4.2. Kết quả ở bảng \ref{tab:4.2} cho thấy $\zeta$ = 04 là một lựa chọn tốt. Cần lưu ý rằng heuristics sẽ chậm hơn khi tăng $\zeta$ vì việc xóa và thêm sẽ mất nhiều thời gian hơn khi có nhiều yêu cầu hơn; do đó, sự so sánh trong bảng \ref{tab:4.2} là không hoàn toàn công bằng.
+
+%Bảng 3: 4.2
+
+\begin{table}[caption={Tham số $\zeta$ và chất lượng giải pháp}, label=tab:4.2]
     \begin{tabular}{@{}lllllllllll@{}}
         \hline
         $\zeta$ & 0.05 & 0.1  & .15  & 0.2  & 0.25 & 0.3  & 0.35 & 0.4  & 0.45 & 0.5     \\
         Avg. gap (\%) & 1.75 & 1.65 & 1.21 & 0.97 & 0.81 & 0.71 & 0.81 & 0.49 & 0.57 & 0.57     \\ \bottomrule
         \end{tabular} \\
         \justify
-        \textit{Ghi chú: Hàng đầu tiên hiển thị Các giá trị Của tham số $\zeta$ đã được kiểm tra Và hàng thứ hai hiển thị khoảng cáCh giữa giải pháp trung bình thu được và giải pháp tốt nhất được tạo ra trong thử nghiệm.}
+        \textit{Ghi chú: Hàng đầu tiên hiển thị các giá trị của tham số $\zeta$ đã được kiểm tra và hàng thứ hai hiển thị chênh lệch giữa trung bình các phương án thu được và phương án tốt nhất được tạo ra trong thử nghiệm.}
+    \label{tab:b1}
 \end{table}
 
-Việc điều chỉnh tham số hoàn chỉnh dẫn đến vectơ tham số sau:
-$(\varphi, \chi, \psi, \omega, p,  p_{worst}, \\ w, c, \sigma_1, \sigma_2, \sigma_3, r, \eta, \zeta) = (9, 3, 2, 5, 6, 3, 0.05, 0.99975, 33, 9, 13, 0.1, 0.025, 0.4)$. Các thử nghiệm của tác giả cũng chỉ ra rằng có thể cải thiện hiệu suất của thuật toán giảm số phương tiện bằng cách đặt ($w,c$)  = (0.35, 0.9999), trong khi tìm kiếm các giải pháp đáp ứng mọi yêu cầu . Điều này tương ứng với nhiệt độ bắt đầu cao hơn và tốc độ làm mát chậm hơn. Điều này cho thấy rằng cần phải đa dạng hóa hơn khi cố gắng giảm thiểu số lượng phương tiện, so với tình huống mà người ta chỉ giảm thiểu khoảng cách di chuyển.
 
-Để điều chỉnh các tham số, tác giả bắt đầu từ dự đoán ban đầu, sau đó điều chỉnh từng tham số một. Khi tất cả các tham số được điều chỉnh, quá trình này sẽ được lặp lại. Bằng cách này, thứ tự hiệu chuẩn đóng một vai trò nhỏ. Mặc dù việc điều chỉnh thông số khá tốn thời gian, nhưng nó có thể dễ dàng được tự động hóa. Trong các bài báo tiếp theo của tác giả (Ropke và Pisinger 2006; Pisinger và Ropke 2005), 11 biến thể của bài toán định tuyến phương tiện được giải quyết bằng cách sử dụng phương pháp heuristic được đề xuất trong bài báo này, tác giả chỉ điều chỉnh lại một số tham số và thu được kết quả rất thuyết phục. Có vẻ như việc điều chỉnh hoàn toàn các tham số chỉ cần được thực hiện một lần.
+Việc điều chỉnh tham số hoàn chỉnh dẫn đến vectơ tham số sau:
+$(\varphi, \chi, \psi, \omega, p,  p_{worst}, \\ w, c, \sigma_1, \sigma_2, \sigma_3, r, \eta, \zeta) = (9, 3, 2, 5, 6, 3, 0.05, 0.99975, 33, 9, 13, 0.1, 0.025, 0.4)$. Các thử nghiệm của tác giả cũng chỉ ra rằng có thể cải thiện hiệu suất của thuật toán giảm số lượng xe bằng cách đặt ($w,c$)  = (0.35, 0.9999), trong khi tìm kiếm các giải pháp đáp ứng mọi yêu cầu . Điều này tương ứng với nhiệt độ bắt đầu cao hơn và tốc độ làm mát chậm hơn. Từ đó ta thấy cần phải đa dạng hóa hơn khi cố gắng giảm thiểu số lượng xe, so với việc chỉ giảm thiểu khoảng cách di chuyển.
+
+Để điều chỉnh các tham số, tác giả bắt đầu từ dự đoán ban đầu, sau đó điều chỉnh từng tham số một. Khi tất cả các tham số được điều chỉnh, quá trình này sẽ được lặp lại. Bằng cách này, thứ tự hiệu chuẩn đóng một vai trò nhỏ. Mặc dù việc điều chỉnh thông số khá tốn thời gian, nhưng nó có thể dễ dàng được tự động hóa. Trong các bài báo tiếp theo của tác giả (Ropke \& Pisinger 2006; Pisinger \& Ropke 2005), 11 biến thể của bài toán định tuyến phương tiện được giải quyết bằng cách sử dụng phương pháp heuristic được đề xuất trong bài báo này, tác giả chỉ điều chỉnh lại một số tham số và thu được kết quả rất thuyết phục. Có vẻ như việc điều chỉnh toàn bộ các tham số chỉ cần thực hiện một lần.
 
 \subsection{Cấu hình LNS}
-Phần này đánh giá cách thức hoạt động của các phương pháp phỏng đoán loại bỏ và chèn khác nhau khi được sử dụng trong phương pháp ALNS heuristic. Trong hầu hết các trường hợp thử nghiệm, một phương pháp ALNS heuristic đơn giản đã được sử dụng chỉ liên quan đến một phương pháp phỏng đoán loại bỏ và một phương pháp phỏng đoán chèn. Bảng 4 cho thấy một bản tóm tắt của thí nghiệm này.
+Phần này đánh giá cách thức hoạt động của các phương pháp heuristics chèn và xóa (removal and insertion heuristics) khác nhau khi sử dụng trong phương pháp ALNS heuristic. Trong hầu hết các trường hợp thử nghiệm, một phương pháp ALNS heuristic đơn giản được sử dụng chỉ liên quan đến một phương pháp heuristics xóa và một phương pháp heuristics chèn. bảng \ref{tab:4.3} thể hiện một bản tóm tắt của thí nghiệm này.
 
+%Bảng 4: 4.3
 
-\begin{table}[caption={Simple LNS Heuristics Compared to the Full Adaptive LNS with Dynamic Weight Adjustment}, label=tab:2]
+\begin{table}[caption={Phương pháp LNS Heuristics đơn giản so với phương pháp LNS tương thích đầy đủ với trọng số điều chỉnh động}, label={Bảng 4.3}]
     \resizebox{\textwidth}{!}{
     \begin{tabular}{@{}llllllllllll@{}}
         \toprule
@@ -79,30 +87,30 @@ Phần này đánh giá cách thức hoạt động của các phương pháp ph
         \textit{Ghi chú: Cột đầu tiên hiển thị liệu Cấu hình phải được coi là LNS hay ALNS heuristic. Cột thứ hai là số cấu hình, cột 3 đến 5 cho biết heuristics xóa nào đã được sử dụng. Các cột từ 6 đến 10 cho biết heuristics thêm nào đã được sử dụng. Cột 11 cho biết liệu "nhiễu" có được thêm vào chức năng mục tiêu trong khi thêm yêu cầu hay không (trong trường hợp này, "nhiễu" đã được thêm vào hàm mục tiêu trong 50\% số lần thêm đối vi cấu hình đơn giản 1–14 trong khi ở Cấu hình 15, số lần thêm "nhiễu" được kiểm soát bằng phương pháp thích nghi (adaptive method)). Cột 12 Cho thấy hiệu suất trung bình của các heuristic khác nhau. Ví dụ: Trong cấu hình 4, tác giả đã sử dụng loại bỏ ngẫu nhiên cùng với phương pháp heuristics thêm regret-2 và tác giả đã áp dụng nhiễu cho giá trị mục tiêu. Điều này dẫn đến một tập hợp các giải pháp có giá trị mục tiêu trung bình cao hơn 3,2\% so với các giải pháp tốt nhất được tìm thấy trong toàn bộ thử nghiệm.}
 \end{table}
 
-Sáu thí nghiệm đầu tiên nhằm mục đích xác định ảnh hưởng của phương pháp xóa heuristic. Tác giả thấy rằng phương pháp Shaw removal là tốt nhất, phương pháp the worst removal heuristic đứng thứ hai và xóa heuristic ngẫu nhiên cho hiệu suất kém nhất. Điều này làm ta cảm thấy yên tâm vì nó cho thấy rằng hai phương pháp xóa heuristic phức tạp hơn một chút thực sự tốt hơn so với phương pháp xóa heuristic đơn giản nhất. Những kết quả này cũng minh họa rằng phương pháp xóa heuristic có thể có tác động khá lớn đến chất lượng của giải pháp thu được, do đó, việc thử nghiệm với những phương pháp xóa heuristic khác sẽ rất thú vị và có thể mang lại lợi ích.
-Tám thí nghiệm tiếp theo cho thấy hiệu suất của phương pháp thêm heuristic. Ở đây, tác giả đã chọn Shaw removal làm cách phỏng đoán loại bỏ vì nó được có hiệu suất trong các thử nghiệm trước đó. Trong các thí nghiệm này, ta thấy rằng tất cả các phương pháp thêm heuristic đều hoạt động khá tốt và chúng khá khó phân biệt với nhau. Regret-3 và regret-4 kết hợp với bổ sung nhiễu (noise) tốt hơn một chút so với phần còn lại. Tuy nhiên, khi quan sát tất cả các thí nghiệm, việc áp dụng nhiễu dường như giúp ích cho phỏng đoán. Thật thú vị khi lưu ý rằng phương pháp thêm heuristic cơ bản hoạt động gần giống như phỏng đoán regret khi được sử dụng trong khung LNS. Quan sát này có thể chỉ ra rằng phương pháp LNS tương đối mạnh đối với phương pháp thêm đã được sử dụng.
-Hàng cuối cùng của Bảng hiển thị hiệu suất của ALNS. Có thể thấy, nó ngang bằng với hai cách tiếp cận đơn giản tốt nhất, nhưng không tốt hơn, điều này thoạt nghe có vẻ đáng thất vọng. Tuy nhiên, kết quả cho thấy rằng cơ chế thích ứng có thể tìm thấy một tập trọng số hợp lý và giả thuyết của tác giả là phương pháp ALNS heuristic mạnh hơn phương pháp ALNS heuristic đơn giản hơn. Nghĩa là, cấu hình đơn giản có thể không tạo ra các giải pháp tốt cho các loại vấn đề khác, trong khi ALNS heuristic tiếp tục hoạt động tốt.
+Sáu thí nghiệm đầu tiên nhằm mục đích xác định ảnh hưởng của phương pháp heuristics xóa. Tác giả thấy rằng phương pháp xóa Shaw là tốt nhất, phương pháp xóa tệ nhất đứng thứ hai và phương pháp heuristics xóa ngẫu nhiên cho hiệu suất kém nhất. Điều này làm ta cảm thấy yên tâm vì nó cho thấy rằng hai phương pháp heuristics xóa phức tạp hơn thực sự tốt hơn so với phương pháp heuristics xóa đơn giản nhất. Những kết quả này cũng cho thấy rằng phương pháp heuristic xóa có thể có tác động khá lớn đến chất lượng của giải pháp thu được, do đó, việc thử nghiệm với những phương pháp heuristics xóa khác sẽ rất thú vị và có thể mang lại lợi ích.
+Tám thí nghiệm tiếp theo cho thấy hiệu suất của phương pháp heuristics chèn. Ở đây, tác giả đã chọn phương pháp xóa Shaw làm cách xóa vì nó hoạt động tốt nhất trong các thử nghiệm trước đó. Trong các thí nghiệm này, ta thấy rằng tất cả các phương pháp  chèn heuristic đều hoạt động khá tốt và khá khó để phân biệt chúng với nhau. Tuy nhiên regret-3 và regret-4 kết hợp với bổ sung nhiễu (noise) tốt hơn một chút so với phần còn lại. Khi quan sát tất cả các thí nghiệm, việc áp dụng nhiễu dường như giúp ích cho heuristic. Thật thú vị khi nhận ra rằng phương pháp heuristics chèn cơ bản hoạt động gần giống như heuristic regret khi được sử dụng trong khung LNS. Quan sát này có thể chỉ ra rằng phương pháp LNS tương đối mạnh so với phương pháp chèn đã được sử dụng.
+
+Hàng cuối cùng của Bảng hiển thị hiệu suất của ALNS. Có thể thấy, hiệu suất này ngang bằng với hai cách tiếp cận đơn giản tốt nhất, nhưng không vượt trội hơn, điều này thoạt nghe có vẻ đáng thất vọng. Tuy nhiên, kết quả cho thấy rằng cơ chế thích ứng (adaptive mechanism) có thể tìm thấy một tập trọng số hợp lý và giả thuyết của tác giả là phương pháp ALNS heuristic mạnh hơn phương pháp LNS heuristic đơn giản. Nghĩa là, cấu hình đơn giản có thể không tạo ra các giải pháp tốt cho các loại bài toán khác, trong khi ALNS heuristic thì tiếp tục hoạt động tốt.
 Một trong những mục đích của các thí nghiệm trong Phần 4.4 là để xác nhận hoặc bác bỏ giả thuyết này.
 
 \section{Kết quả}
 Phần này cung cấp các thí nghiệm tính toán được tiến hành để kiểm tra hiệu suất của heuristic. Có ba mục tiêu chính cho phần này:
 \begin{itemize}
-    \item Để so sánh phương pháp ALNS heuristic với phương pháp ALNS heuristic đơn giản chỉ chứa một phương pháp phỏng đoán xóa và một phương pháp phỏng đoán thêm.
-    \item Để xác định xem các dặc tính nhất định của vấn đề có ảnh hưởng đến khả năng (A)LNS heuristic tìm ra các giải pháp tốt hay không.
-    \item Để so sánh phương pháp ALNS heuristic với phương pháp PDPTW heuristic tiên tiến nhất từ tài liệu.
+    \item Để so sánh phương pháp ALNS heuristic với phương pháp ALNS heuristic đơn giản chỉ chứa một phương pháp heuristic thêm và một phương pháp heuristic xóa.
+    \item Để xác định xem các đặc tính nhất định của bài toán có ảnh hưởng đến khả năng (A)LNS heuristic tìm ra các giải pháp tốt hay không.
+    \item Để so sánh phương pháp ALNS heuristic với phương pháp PDPTW heuristic tiên tiến nhất trên lí thuyết.
    
 \end{itemize}
 
-Để làm rõ liệu ALNS heuristic có đáng giá so với ALNS heuristic đơn giản hay không, tác giả sẽ hiển thị kết quả cho cả ALNS heuristic và ALNS heuristic đơn giản tốt nhất từ bảng 4. Cấu hình 12 được chọn làm đại diện cho ALNS heuristic đơn giản vì nó hoạt động tốt hơn một chút so với cấu hình 10. Trong các phần sau, tác giả đề cập đến phương pháp ALNS heuristic đơn giản và đầy đủ là ALNS và LNS tương ứng.
-Tất cả các thử nghiệm được thực hiện trên PC Pentium IV 1.5 GHz với bộ nhớ trong 256 MB, chạy Linux. Thuật toán đã triển khai sẽ tính toán thời gian và khoảng cách di chuyển bằng cách sử dụng các số dấu phẩy động có độ chính xác gấp đôi. Tham số được tìm thấy trong Phần 4.3.2 đã được sử dụng trong tất cả các thử nghiệm trừ khi có thông báo khác.
+Để làm rõ liệu ALNS heuristic có đáng giá hơn so với LNS heuristic đơn giản hay không, tác giả sẽ hiển thị kết quả cho cả phương pháp ALNS heuristic và phương pháp LNS heuristic đơn giản tốt nhất trong Bảng \ref{tab:4.3}. Cấu hình 12 được chọn làm đại diện cho LNS heuristic đơn giản vì nó hoạt động tốt hơn một chút so với cấu hình 10. Trong các phần sau, tác giả đề cập đến phương pháp ALNS heuristic đơn giản và đầy đủ lần lượt là LNS và ALNS.
+Tất cả các thử nghiệm được thực hiện trên PC Pentium IV 1.5 GHz với bộ nhớ trong 256 MB, chạy Linux. Thuật toán đã triển khai sẽ tính toán thời gian và khoảng cách di chuyển bằng cách sử dụng các số dấu phẩy động có độ chính xác gấp đôi. Tham số được tìm thấy trong Phần 4.3.2 được sử dụng trong tất cả các thử nghiệm trừ khi có thông báo khác.
 
 \subsection{Tập dữ liệu}
-Vì mô hình được xem xét trong bài viết này khá phức tạp nên khó có thể tìm thấy bất kỳ cấu hình điểm chuẩn (benchmark instances) nào cân nhắc chính xác cùng một mô hình và hàm mục tiêu. Các cấu hình điểm chuẩn gần nhất với mô hình được xem xét trong bài viết này là các trường hợp do Nanry và Barnes (2000) xây dựng và các trường hợp do Li và Lim (2001) xây dựng. Cả hai bộ dữ liệu đều là về vấn đề nhận và giao hàng tại một kho hàng với khung thời gian, xây dựng từ bài toán VRPTW.
+Vì mô hình được xem xét trong bài viết này khá phức tạp nên khó có thể tìm thấy bất kỳ cấu hình benchmark (benchmark instances) nào cân nhắc chính xác cùng một mô hình và hàm mục tiêu. Các cấu hình benchmark gần nhất với mô hình được nhắc đến trong bài viết này là các trường hợp do Nanry \& Barnes (2000), và Li \& Lim (2001) xây dựng. Cả hai bộ dữ liệu đều là về bài toán lấy và giao hàng tại một kho hàng với khung thời gian ràng buộc, xây dựng từ bài toán VRPTW.
 
+%Bảng 5
 
-\textit{Ghi chú: Cột đầu tiên đưa ra quy mô của vấn đề; cột tiếp theo cho biết số vấn đề trong tập dữ liệu có kích thước cụ thể. Phần còn lại của bảng bao gồm bốn cột chính, mỗi cột được chia thành hai cột con, một cho ALNS và một cho LNS. Cột "Các giải pháp được biết đến nhiều nhất" cho biết có bao nhiêu vấn đề mà giải pháp được biết đến nhiều nhất đã được xác định. Giải pháp được biết đến nhiều nhất là giải pháp được báo cáo bởi Li và Lim hoặc giải pháp tốt nhất được xác định bởi (A)LNS heuristic, tùy thuộc vào giải pháp nào là tốt nhất. Cột tiếp theo cho biết giải pháp trung bình cách giải pháp tốt nhất đã biết bao xa. Con số này được tính trung bình trên tất cả các bài toán có kích thước cụ thể. Cột tiếp theo cho biết thời gian trung bình dành cho heuristic để giải quyết một vấn đề. Cột cuối cùng hiển thị số lần heuristic không tìm ra giải pháp trong đó tất cả các yêu cầu được đáp ứng bởi số lượng phương tiện nhất định trong tất cả các nỗ lực giải quyết một vấn đề cụ thể.}
-
-\begin{table}[caption={Summary of Results Obtained on Li and Lim Instances (2001)}, label=tab:2]
+\begin{table}[caption={Tóm tắt kết quả thu được từ các trường hợp của Li \& Lim (2001)}, label=tab:4.4]
     \resizebox{\textwidth}{!}{
     \begin{tabular}{@{}llllllllll@{}}
         \toprule
@@ -117,32 +125,36 @@ Vì mô hình được xem xét trong bài viết này khá phức tạp nên kh
         1,000 &58 &47 &4 &2.26 &4.22 &2,916 &5,252 &0 &1 \\ \bottomrule
         \end{tabular}} \\
         \justify
-        \textit{Ghi chú: Cột đầu tiên đưa ra quy mô của vấn đề; cột tiếp theo cho biết số vấn đề trong tập dữ liệu có kích thước cụ thể. Phần còn lại của bảng bao gồm bốn cột chính, mỗi cột được chia thành hai cột con, một cho ALNS và một cho LNS. Cột "Các giải pháp được biết đến nhiều nhất" cho biết có bao nhiêu vấn đề mà giải pháp được biết đến nhiều nhất đã được xác định. Giải pháp được biết đến nhiều nhất là giải pháp được báo cáo bởi Li và Lim hoặc giải pháp tốt nhất được xác định bởi (A)LNS heuristic, tùy thuộc vào giải pháp nào là tốt nhất. Cột tiếp theo cho biết giải pháp trung bình cách giải pháp tốt nhất đã biết bao xa. Con số này được tính trung bình trên tất cả các bài toán có kích thước cụ thể. Cột tiếp theo cho biết thời gian trung bình dành cho heuristic để giải quyết một vấn đề. Cột cuối cùng hiển thị số lần heuristic không tìm ra giải pháp trong đó tất cả các yêu cầu được đáp ứng bởi số lượng phương tiện nhất định trong tất cả các nỗ lực giải quyết một vấn đề cụ thể.}
+        \textit{Ghi chú: Cột đầu tiên đưa ra quy mô của bài toán; cột tiếp theo cho biết số bài toán trong tập dữ liệu có kích thước cụ thể. Phần còn lại của bảng bao gồm bốn cột chính, mỗi cột được chia thành hai cột con, một cho ALNS và một cho LNS. Cột "Các giải pháp được biết đến nhiều nhất" cho biết có bao nhiêu bài toán mà giải pháp được biết đến nhiều nhất đã được xác định. Giải pháp được biết đến nhiều nhất là giải pháp được báo cáo bởi Li \& Lim hoặc giải pháp tốt nhất được xác định bởi (A)LNS heuristic, tùy thuộc vào giải pháp nào là tốt nhất. Cột tiếp theo cho biết giải pháp trung bình cách giải pháp tốt nhất đã biết bao xa. Con số này được tính trung bình trên tất cả các bài toán có kích thước cụ thể. Cột tiếp theo cho biết thời gian trung bình dành cho heuristic để giải quyết một bài toán. Cột cuối cùng hiển thị số lần heuristic không tìm ra giải pháp trong đó tất cả các yêu cầu được đáp ứng bởi số lượng phương tiện nhất định trong tất cả các nỗ lực giải quyết một bài toán cụ thể.}
 \end{table}
 
-tác giả chỉ báo cáo kết quả trên tập dữ liệu do Li và Lim đề xuất, vì các trường hợp Nanry và Barnes rất dễ giải quyết nhờ kích thước của chúng.
-Vấn đề được xem xét bởi Li và Lim đơn giản hơn vấn đề trong bài viết này bởi vì: (1) nó không chứa nhiều kho; (2) tất cả các yêu cầu phải được phục vụ; (3) tất cả các phương tiện được giả định là có thể phục vụ tất cả các yêu cầu. Khi giải quyết các trường hợp của Li và Lim bằng cách sử dụng ALNS heuristic, tác giả đặt $\alpha$ bằng 1 và $\beta$ bằng 0 trong hàm mục tiêu của mình. Trong Phần 4.5, tác giả coi việc giảm thiểu số lượng phương tiện là ưu tiên hàng đầu trong khi ở Phần 4.4.2, tác giả chỉ giảm thiểu độ dài quãng đường cần lái xe.
-Để kiểm tra tất cả các khía cạnh của mô hình được đề xuất trong bài báo này, tác giả cũng giới thiệu một số trường hợp mới, được tạo ngẫu nhiên. Những trường hợp này được mô tả trong Phần 4.4.3.
 
-\subsection{So sánh ALNS và LNS bằng cách sử dụng các trường hợp của Li Và Lim}
-Phần này so sánh ALNS heuristic và LNS heuristic bằng cách sử dụng các cấu hình điểm chuẩn do Li Và Lim (2001) đề xuất. Tập dữ liệu Chứa 354 cấu hình với 100 đến 1,000 vị trí. Có thể tải xuống bộ dữ liệu từ SINTEF.
-Trong phần này, tác giả sử dụng quãng đường đã đi làm mục tiêu của mình mặc dù giảm thiểu phương tiện là mục tiêu chính cho những trường hợp này. Lý do cho quyết định này là việc giảm thiểu khoảng cách làm cho việc so sánh các phương pháp phỏng đoán trở nên dễ dàng hơn và việc giảm thiểu khoảng cách là mục tiêu ban đầu của phương pháp phỏng đoán được đề xuất. Số lượng phương tiện có sẵn để phục vụ các yêu cầu được đặt thành các giá trị tối thiểu được báo cáo bởi Li Và Lim (2001) trên trang web của họ, rất tiếc là trang này không còn trực tuyến nữa. Các phỏng đoán được áp dụng 10 lần cho mỗi trường hợp với 400 vị trí trở xuống và 5 lần cho từng trường hợp, với hơn 400 địa điểm. Các thí nghiệm được tóm tắt trong bảng 5.
-Kết quả cho thấy rằng ALNS heuristic trên cả bốn điều kiện đều hoạt động tốt hơn so với LNS heuristic. Người ta cũng nhận thấy rằng ALNS heuristic thậm chí trở nên hấp dẫn hơn khi kích thước của vấn đề tăng lên. Có vẻ kỳ lạ là LNS heuristic mất nhiều thời gian hơn so với ALNS heuristic khi cả hai đều có cùng một số lần lặp LNS. Lý do cho việc này là Shaw removal heuristic được sử dụng bởi ALNS heuristic tốn nhiều thời gian hơn so với hai phương pháp phỏng đoán xóa khác.
+Tác giả chỉ báo cáo kết quả trên tập dữ liệu do Li \& Lim đề xuất, vì các trường hợp Nanry \& Barnes rất dễ giải quyết nhờ kích thước của chúng.
+Bài toán được xem xét bởi Li \& Lim đơn giản hơn bài toán trong bài viết này bởi vì: (1) nó không chứa nhiều kho; (2) tất cả các yêu cầu phải được phục vụ; (3) tất cả các xe được giả định là có thể phục vụ tất cả các yêu cầu. Khi giải quyết các trường hợp của Li \& Lim bằng cách sử dụng ALNS heuristic, tác giả đặt $\alpha$ bằng 1 và $\beta$ bằng 0 trong hàm mục tiêu của mình. Trong Phần 4.5, tác giả coi việc giảm thiểu số lượng xe là ưu tiên hàng đầu trong khi ở Phần 4.4.2, tác giả chỉ giảm thiểu độ dài quãng đường cần lái xe.
+Để kiểm tra tất cả các khía cạnh của mô hình được đề xuất trong bài báo này, tác giả cũng giới thiệu một số cấu hình mới, được tạo ngẫu nhiên. Những cấu hình này được mô tả trong Phần 4.4.3.
 
-\subsection{Các trường hợp mới}
+\subsection{So sánh ALNS và LNS bằng cách sử dụng những cấu hình của Li \& Lim}
+Phần này so sánh ALNS heuristic và LNS heuristic bằng cách sử dụng cấu hình benchmark do Li \& Lim (2001) đề xuất. Tập dữ liệu chứa 354 cấu hình với 100 đến 1,000 vị trí. Có thể tải xuống bộ dữ liệu từ SINTEF.
+Trong phần này, tác giả sử dụng quãng đường đã đi làm mục tiêu của mình mặc dù giảm thiểu số xe là mục tiêu chính cho những trường hợp này. Lý do cho quyết định này là việc giảm thiểu khoảng cách làm cho việc so sánh các heuristics trở nên dễ dàng hơn và việc giảm thiểu khoảng cách là mục tiêu ban đầu của phương pháp heuristics được đề xuất. Số lượng xe có sẵn để phục vụ các yêu cầu được đặt là giá trị tối thiểu đã được báo cáo bởi Li \& Lim (2001) trên trang web của họ, rất tiếc là trang này không còn trực tuyến nữa.
 
-Phần này cung cấp kết quả về các trường hợp PDPTW được tạo ngẫu nhiên có chứa các đặc điểm của mô hình không được sử dụng trong các bài toán điểm chuẩn của Li Và Lim (2001) được xem xét trong Phần 4.4.2. Các đặc điểm này là: Nhiều kho, các tuyến đường có điểm bắt đầu và điểm kết thúc khác nhau và các yêu cầu đặc biệt chỉ có thể được phục vụ bởi một nhóm phương tiện phụ nhất định. Khi giải các trường hợp này, ta đặt $\alpha$= $\beta$=1 trong hàm mục tiêu sao cho khoảng cách và thời gian được tính trọng số như nhau trong hàm mục tiêu. Tác giả không thực hiện giảm thiểu phương tiện vì các phương tiện không đồng nhất. 
-Ba loại phân phối địa lý của các yêu cầu được xem xét: Các vấn đề với các vị trí được phân bổ đồng đều trong mặt phẳng, các vấn đề với các vị trí được phân bổ trong 10 cụm và các vấn đề với 50\% các vị trí được đặt trong 10 cụm và 50\% các vị trí được phân bổ đồng đều. Ba loại bài toán này lấy cảm hứng từ các bài toán điểm chuẩn VRPTW của Solomon (1987), và các bài toán tương tự như các bài toán r, c, và RC Solomon tương ứng. Tác giả xem xét các vấn đề với 50, 100, 250 và 500 yêu cầu; tất cả đều là vấn đề đa kho. Đối với mỗi kích thước vấn đề tác giả tạo ra 12 vấn đề, trong khi tác giả thử mọi sự kết hợp của ba đặc điểm được hiển thị bên dưới:
+Các heuristics được áp dụng 10 lần cho mỗi cấu hình với 400 vị trí trở xuống và 5 lần cho từng cấu hình, với nhiều hơn 400 địa điểm. Các thí nghiệm được tóm tắt trong Bảng \ref{tab:4.4}.
+Kết quả cho thấy rằng ALNS heuristic trên cả bốn điều kiện đều hoạt động tốt hơn so với LNS heuristic. Người ta cũng nhận thấy rằng ALNS heuristic thậm chí trở nên thú vị hơn khi kích thước của bài toán tăng lên. Có vẻ kỳ lạ là LNS heuristic mất nhiều thời gian hơn so với ALNS heuristic khi cả hai đều có cùng một số lần lặp LNS. Lý do cho việc này là phương pháp xóa heuristic của Shaw được sử dụng bởi LNS heuristic tốn nhiều thời gian hơn so với hai phương pháp heuristics xóas khác.
+
+\subsection{Các cấu hình mới}
+
+Phần này cung cấp kết quả về các cấu hình PDPTW được tạo ngẫu nhiên có chứa các đặc điểm của mô hình không được sử dụng trong các bài toán benchmark của Li \& Lim (2001) trong Phần 4.4.2. Các đặc điểm này là: Nhiều kho, các tuyến đường có điểm bắt đầu và điểm kết thúc khác nhau và các yêu cầu đặc biệt chỉ có thể được phục vụ bởi một nhóm xe nhất định. Khi giải các trường hợp này, ta đặt $\alpha$= $\beta$=1 trong hàm mục tiêu sao cho khoảng cách và thời gian được tính trọng số như nhau. Tác giả không thực hiện giảm thiểu lượng xe vì các xe là không đồng nhất. 
+Ba dạng phân phối địa lý của các yêu cầu được xem xét: Các bài toán với các vị trí được phân bổ đồng đều trong mặt phẳng, các bài toán với các vị trí được phân bổ trong 10 cụm và các bài toán với 50\% các vị trí được đặt trong 10 cụm và 50\% các vị trí được phân bổ đồng đều. Ba dạng bài toán này lấy cảm hứng từ các bài toán benchmark VRPTW của Solomon (1987), và các bài toán tương tự như các bài toán R, C, và RC Solomon. Tác giả xem xét các bài toán với 50, 100, 250 và 500 yêu cầu; tất cả đều là bài toán đa kho. Đối với mỗi kích thước bài toán tác giả tạo ra 12 bài toán, trong khi tác giả thử mọi sự kết hợp của ba đặc điểm được hiển thị bên dưới:
 \begin{itemize}
     \item Loại tuyến đường: (1) Tuyến đường bắt đầu và kết thúc tại cùng một vị trí, (2) Tuyến đường bắt đầu và kết thúc ở các vị trí khác nhau.
     nhỏ hơn, có cùng cách giải.
-    \item Loại yêu cầu: (1) tất cả các yêu cầu đều là yêu cầu thông thường, (2) 50\% là yêu cầu đặc biệt. Các yêu cầu đặc biệt chỉ có thể được phục vụ bởi một nhóm nhỏ các phương tiện. Trong các vấn đề thử nghiệm, mỗi yêu cầu đặc biệt chỉ có thể được phục vụ bởi 30\% đến 60\% số phương tiện.
+    \item Loại yêu cầu: (1) tất cả các yêu cầu đều là yêu cầu thông thường, (2) 50\% là yêu cầu đặc biệt. Các yêu cầu đặc biệt chỉ có thể được phục vụ bởi một nhóm nhỏ các phương tiện. Trong các bài toán thử nghiệm, mỗi yêu cầu đặc biệt chỉ có thể được phục vụ bởi 30\% đến 60\% số phương tiện.
     \item Phân phối địa lý: (1) Đồng nhất, (2) Phân cụm Và (3) Bán phân cụm.
 \end{itemize}
-Có thể tải xuống các phiên bản từ www.diku.dk/ ~sropke. Các phỏng đoán đã được kiểm tra bằng cách áp dụng chúng cho mỗi vấn đề trong số 48 vấn đề 10 lần. Bảng 6 cho thấy một bản tóm tắt các kết quả được tìm thấy. Trong bảng, có thể liệt kê số lượng bài toán mà hai phương pháp heuristics tìm ra lời giải tốt nhất đã biết. Giải pháp tốt nhất đơn giản là giải pháp tốt nhất được tìm thấy trong suốt thí nghiệm này.
+Có thể tải các cấu hình từ www.diku.dk/ ~sropke. Các heuristics đã được kiểm tra bằng cách áp dụng chúng cho mỗi bài toán trong số 48 bài toán 10 lần. Bảng \ref{tab:4.5} cho thấy một bản tóm tắt các kết quả tìm được. Trong bảng, có thể liệt kê số lượng bài toán mà hai phương pháp heuristics tìm ra lời giải tốt nhất đã biết. Giải pháp tốt nhất đơn giản là giải pháp tốt nhất được tìm thấy trong suốt thí nghiệm.
 
+%Bảng 6: 4.5
 
-\begin{table}[caption={Summary of Results Obtained on New Instances}, label=tab:2]
+\begin{table}[caption={Tóm tắt kết quả thu được từ các cấu hình mới}, label=tab:4.5]
     \begin{tabular}{@{}llllllll@{}}
         \toprule
                     &           & \multicolumn{2}{l}{\footnotesize{Best known solutions}}& \multicolumn{2}{l}{\footnotesize{Avg. gap(\%)}}& \multicolumn{2}{l}{\footnotesize{Average time (s)}} \\ 
@@ -155,18 +167,20 @@ Có thể tải xuống các phiên bản từ www.diku.dk/ ~sropke. Các phỏn
         Sum &48 &35 &14&5.55 &6.98 &4,488 &9,596 \\     \bottomrule
         \end{tabular} \\
         \justify
-        \textit{Ghi chú: Chú thích của bảng được hiểu như Bảng 5. Hàng cuối cùng tính tổng mỗi cột. Lưu ý rằng quy mô của các vấn đề trong bảng này được đưa ra dưới dạng số lượng yêu cầu chứ không phải số lượng vị trí.}
+        \textit{Ghi chú: Chú thích của bảng được hiểu như bảng \ref{tab:4.4}. Hàng cuối cùng tính tổng mỗi cột. Lưu ý rằng quy mô của các bài toán trong bảng này được đưa ra dưới dạng số lượng yêu cầu chứ không phải số lượng vị trí.}
 \end{table}
 
-Tác giả quan sát các xu hướng tương tự như trong Bảng 5; ALNS vẫn vượt trội hơn so với LNS, nhưng người ta nhận thấy rằng khoảng cách về chất lượng giải pháp giữa hai phương pháp đối với tập các điều chỉnh này nhỏ hơn trong khi sự khác biệt về thời gian chạy lớn hơn so với kết quả trên các trường hợp của Li Và Lim (2001). Người ta cũng nhận thấy rằng việc giải các trường hợp nhỏ của lớp bài toán này dường như khó hơn so với các trường hợp Li Và Lim.
+Tác giả quan sát các xu hướng tương tự như trong bảng \ref{tab:4.4}; ALNS vẫn vượt trội hơn so với LNS, nhưng người ta nhận thấy, so với kết quả trên các cấu hình của Li \& Lim (2001), thì khoảng cách về chất lượng của phương án giữa hai phương pháp đối với tập cấu hình này nhỏ hơn trong khi sự khác biệt về thời gian chạy lớn hơn. Người ta cũng nhận thấy rằng việc giải các trường hợp nhỏ của lớp bài toán này dường như khó hơn so với các trường hợp Li \& Lim.
 
-Bảng 8 tóm tắt các đặc tính của vấn đề ảnh hưởng như thế nào đến chất lượng giải pháp trung bình. Những kết quả này cho thấy rằng các vấn đề phân cụm là khó giải quyết nhất, trong khi các trường hợp phân bố đồng đều là dễ nhất. Kết quả cũng chỉ ra rằng các yêu cầu đặc biệt khiến vấn đề khó giải quyết hơn một chút. Các thử nghiệm về loại tuyến đường so sánh tình huống mà các tuyến đường bắt đầu và kết thúc tại cùng một vị trí (tình huống điển hình được xem xét trong tài liệu) với tình huống mỗi tuyến đường bắt đầu và kết thúc ở các vị trí khác nhau. Ở đây, tác giả hy vọng trường hợp cuối cùng sẽ dễ giải quyết hơn, vì tác giả có các tuyến đường mà vị trí bắt đầu và kết thúc khác nhau, từ đó sẽ có được thông tin về khu vực mà tuyến đường có nhiều khả năng sẽ đi qua nhất. Các kết quả trong Bảng 8 xác nhận những kỳ vọng này.
-Ngoài việc điều tra câu hỏi về cách các đặc tính của mô hình ảnh hưởng đến chất lượng giải pháp trung bình thu được từ heuristics, tác giả cũng muốn biết liệu sự hiện diện của một số đặc tính có thể khiến LNS hoạt động tốt hơn ALNS hay không. Đối với các đặc tính được xem xét, câu trả lời là tiêu cực.
+bảng \ref{tab:4.7} tóm tắt các đặc tính của bài toán ảnh hưởng như thế nào đến chất lượng trung bình của giải pháp. Những kết quả này cho thấy rằng các bài toán phân cụm là khó giải quyết nhất, trong khi các trường hợp phân bố đồng đều là dễ nhất. Kết quả cũng chỉ ra rằng các yêu cầu đặc biệt khiến bài toán khó giải quyết hơn một chút. Các thử nghiệm về loại tuyến đường so sánh các tuyến đường bắt đầu và kết thúc tại cùng một vị trí (tình huống điển hình được xem xét trong tài liệu) với tình huống mỗi tuyến đường bắt đầu và kết thúc ở các vị trí khác nhau. Ở đây, tác giả hy vọng trường hợp sau sẽ dễ giải quyết hơn, vì khi có các tuyến đường mà vị trí bắt đầu và kết thúc khác nhau sẽ có được thông tin về khu vực mà tuyến đường có nhiều khả năng sẽ đi qua nhất. Các kết quả trong Bảng \ref{tab:4.7} xác nhận những kỳ vọng này.
+Ngoài việc trả lời cho câu hỏi về cách các đặc tính của mô hình ảnh hưởng đến chất lượng trung bình của giải pháp thu được từ heuristics, tác giả cũng muốn biết liệu sự hiện diện của một số đặc tính có thể khiến LNS hoạt động tốt hơn ALNS hay không. Đối với các đặc tính được xét, câu trả lời là không.
 
 \section{So sánh với các phương pháp heuristics hiện có}
-Phần này so sánh các phương pháp ALNS heuristics với các phương pháp heuristics hiện có cho PDPTW. Việc so sánh được thực hiện bằng cách sử dụng các trường hợp điểm chuẩn do Li và Lim (2001) đề xuất, cũng được sử dụng trong phần 4.4.2. Khi các vấn đề PDPTW đã được giải quyết trong tài liệu, mục tiêu chính là giảm thiểu số lượng phương tiện được sử dụng, trong khi mục tiêu phụ là giảm thiểu quãng đường di chuyển. Với mục đích này, tác giả sử dụng thuật toán giảm thiểu phương tiện được mô tả trong Phần 3.7. ALNS heuristic được áp dụng 10 lần cho mỗi trường hợp có 200 vị trí trở xuống và 5 lần cho mỗi trường hợp có hơn 200 vị trí. Các thử nghiệm được tóm tắt trong Bảng 7, 9 và 10. Cần lưu ý rằng cần phải giảm tham số w và tăng tham số c khi các trường hợp có 1,000 vị trí được giải quyết để có được chất lượng giải pháp hợp lý. Ngoài ra, các tham số được cài đặt giống nhau đã được sử dụng cho tất cả các trường hợp.
+Phần này so sánh các phương pháp ALNS heuristics với các phương pháp heuristics hiện có cho bài toán PDPTW. Việc so sánh được thực hiện bằng cách sử dụng các cấu hình benchmark do Li \& Lim (2001) đề xuất, các cấu hình này cũng được sử dụng trong phần 4.4.2. Khi các bài toán PDPTW đã được giải quyết, mục tiêu chính là giảm thiểu số lượng xe được sử dụng, trong khi mục tiêu phụ là giảm thiểu quãng đường di chuyển. Với mục đích này, tác giả sử dụng thuật toán giảm thiểu lượng xe được mô tả trong Phần 3.7. ALNS heuristic được áp dụng 10 lần cho mỗi trường hợp có 200 vị trí trở xuống và 5 lần cho mỗi trường hợp có hơn 200 vị trí. Các thử nghiệm được tóm tắt trong bảng \ref{tab:4.6}, \ref{tab:4.8} và \ref{tab:4.9}. Cần lưu ý rằng cần phải giảm tham số $w$ và tăng tham số $c$ khi các trường hợp có 1,000 vị trí được giải quyết để có được chất lượng giải pháp hợp lý. Ngoài ra, các tham số được cài đặt giống nhau đã được sử dụng cho tất cả các trường hợp.
 
-\begin{table}[caption={Comparison Between ALNS Heuristic and Existing Heuristics}, label=tab:2]
+%Bảng 7
+
+\begin{table}[caption={So sánh ALNS Heuristic và những Heuristics đã có}, label=tab:4.6]
     \resizebox{\textwidth}{!}{
     \begin{tabular}{@{}llllllllllll@{}}
         & \multicolumn{2}{l}{Best known 2003} & \multicolumn{4}{l}{BH best} & \multicolumn{3}{l}{ALNS best of 10 or 5} & \multicolumn{2}{l}{ALNS best} \\ \cline{1-12} 
@@ -190,11 +204,13 @@ Phần này so sánh các phương pháp ALNS heuristics với các phương ph�
         1,000&2,698 &2,195,755 &2,759 &2,225,190 &6,174 &8,100 &2 652 &2,137,034 &5,370 &2,646  &2,122,922 \\ \bottomrule
         \end{tabular}} \\
         \justify
-        \textit{Ghi chú: Mỗi hàng trong bảng tương ứng với một tập hợp các vấn đề có cùng số vị trí. Mỗi tập hợp vấn đề này chứa từ 56 đến 60 trường hợp (xem Bảng 9). Cột đầu tiên cho biết số lượng vị trí trong mỗi vấn đề; hai cột tiếp theo đưa ra tổng số phương tiện được sử dụng và tổng quãng đường di chuyển trong các giải pháp nổi tiếng nhất trước đây như được liệt kê trên trang web SINTEF vào mùa hè năm 2003. Bốn cột tiếp theo hiển thị thông tin về các giải pháp có được từ phương pháp heuristic của Bent và Van Hentenryck (2003a). Hai cột Avg.TTB và Avg.Time lần lượt hiển thị thời gian trung bình cần thiết để đạt được giải pháp tốt nhất và thời gian trung bình dành cho từng trường hợp. Cả hai cột đều báo cáo thời gian cần thiết để thực hiện một thử nghiệm trên một phiên bản. Ba cột tiếp theo báo cáo các giải pháp thu được trong thử nghiệm với phương pháp ALNS heuristic trong đó phương pháp heuristic được áp dụng 5 hoặc 10 lần cho mỗi vấn đề. Hai cột cuối cùng báo cáo các giải pháp tốt nhất thu được trong một số thử nghiệm với ALNS heuristic của tác giả và với các cài đặt tham số khác nhau. Lưu ý rằng Bent và Van Hentenryck trong một số trường hợp đã tìm thấy kết quả tốt hơn một chút so với báo cáo trên trang web SINTEF năm 2003. Đây là lý do tại sao số lượng phương tiện được sử dụng bởi BH heuristic cho các bài toán 200 vị trí lại nhỏ hơn so với bài toán được biết đến nhiều nhất.}
+        \textit{Ghi chú: Mỗi hàng trong bảng tương ứng với một tập hợp các bài toán có cùng số vị trí. Mỗi tập hợp bài toán này chứa từ 56 đến 60 trường hợp (xem Bảng \ref{tab:4.8}). Cột đầu tiên cho biết số lượng vị trí trong mỗi bài toán; hai cột tiếp theo đưa ra tổng số phương tiện được sử dụng và tổng quãng đường di chuyển trong các giải pháp nổi tiếng nhất trước đây như được liệt kê trên trang web SINTEF vào mùa hè năm 2003. Bốn cột tiếp theo hiển thị thông tin về các giải pháp có được từ phương pháp heuristic của Bent và Van Hentenryck (2003a). Hai cột Avg.TTB và Avg.Time lần lượt hiển thị thời gian trung bình cần thiết để đạt được giải pháp tốt nhất và thời gian trung bình dành cho từng trường hợp. Cả hai cột đều báo cáo thời gian cần thiết để thực hiện một thử nghiệm trên một phiên bản. Ba cột tiếp theo báo cáo các giải pháp thu được trong thử nghiệm với phương pháp ALNS heuristic trong đó phương pháp heuristic được áp dụng 5 hoặc 10 lần cho mỗi bài toán. Hai cột cuối cùng báo cáo các giải pháp tốt nhất thu được trong một số thử nghiệm với ALNS heuristic của tác giả và với các cài đặt tham số khác nhau. Lưu ý rằng Bent và Van Hentenryck trong một số trường hợp đã tìm thấy kết quả tốt hơn một chút so với báo cáo trên trang web SINTEF năm 2003. Đây là lý do tại sao số lượng xe được sử dụng bởi BH heuristic cho các bài toán 200 vị trí lại nhỏ hơn so với bài toán được biết đến nhiều nhất.}
 \end{table}
 
 
-\begin{table}[caption={Summary of the Influence of Certain Problem Features on the Heuristic Solutions}, label=tab:2]
+%Bảng 8
+
+\begin{table}[caption={Tóm tắt ảnh hưởng từ một số đặc tính nhất định của bài toán với phương pháp Heuristic}, label=tab:4.7]
     \begin{tabular}{lll}
         \toprule
         Features& ALNS(\%) & LNS(\%) \\ \midrule
@@ -208,7 +224,9 @@ Phần này so sánh các phương pháp ALNS heuristics với các phương ph�
     \end{tabular} \\
 \end{table}
 
-\begin{table}[caption={Comparison with Previously Best Known Solutions}, label=tab:2]
+%Bảng 9
+
+\begin{table}[caption={So sánh với những phương pháp tốt nhất hiện có}, label=tab:4.8]
     \begin{tabular}{llllll}
         \toprule
          & & \multicolumn{2}{l}{\footnotesize{ALNS best of 10 or 5}} & \multicolumn{2}{l}{\footnotesize{ALNS best}} \\
@@ -222,10 +240,12 @@ Phần này so sánh các phương pháp ALNS heuristics với các phương ph�
          1,000 & 58 & 50 & 54 & 51 & 55  \\
     \end{tabular} \\
     \justify
-    \textit{Ghi Chú: Bảng được nhóm theo quy mô vấn đề. Cột đầu tiên hiển thị quy mô vấn đề; cột tiếp theo hiển thị số vấn đề có kích thước đó. Hai cột tiếp theo cung cấp thông tin bổ sung về thử nghiệm trong đó phương pháp ALNS heuristics được áp dụng 5 hoặc 10 lần cho mỗi trường hợp. Các cột < PB báo cáo số lần giải pháp tốt nhất được tìm ra bởi ALNS heuristic tốt hơn hoàn toàn so với giải pháp tốt nhất đã biết trước đó. Các cột PB cho biết giải pháp tốt nhất do ALNS tìm thấy ít nhất tốt bằng giải pháp tốt nhất đã biết trước đây. Hai cột cuối cùng hiển thị thông tin về các giải pháp tốt nhất thu được trong quá trình thử nghiệm với các cài đặt tham số khác nhau.}
+    \textit{Ghi Chú: Bảng được nhóm theo quy mô bài toán. Cột đầu tiên hiển thị quy mô bài toán; cột tiếp theo hiển thị số bài toán có kích thước đó. Hai cột tiếp theo cung cấp thông tin bổ sung về thử nghiệm trong đó phương pháp ALNS heuristics được áp dụng 5 hoặc 10 lần cho mỗi trường hợp. Các cột < PB báo cáo số lần giải pháp tốt nhất được tìm ra bởi ALNS heuristic tốt hơn hoàn toàn so với giải pháp tốt nhất đã biết trước đó. Các cột PB cho biết giải pháp tốt nhất do ALNS tìm thấy ít nhất tốt bằng giải pháp tốt nhất đã biết trước đây. Hai cột cuối cùng hiển thị thông tin về các giải pháp tốt nhất thu được trong quá trình thử nghiệm với các cài đặt tham số khác nhau.}
 \end{table}
 
-\begin{table}[caption={Average Performance of the ALNS Heuristic}, label=tab:2]
+%Bảng 10
+
+\begin{table}[caption={Hiệu suất trung bình của ALNS Heuristic}, label=tab:4.9]
     \begin{tabular}{lll}
         \toprule
         Number of locations& Avg. number of vehicles & Avg. Dist \\ \midrule
@@ -237,19 +257,21 @@ Phần này so sánh các phương pháp ALNS heuristics với các phương ph�
     1,000 & 2,677 & 2,129,032 \\
     \end{tabular} \\
     \justify
-    \textit{Ghi Chú: Các giải pháp tốt nhất được báo cáo trong Bảng 7 và 9 tất nhiên không thu được trong tất cả các thí nghiệm. Bảng này cho biết số lượng phương tiện trung bình và quãng đường trung bình đã đi. Những con số này có thể được so sánh với những con số trong Bảng 7.}
+    \textit{Ghi Chú: Các giải pháp tốt nhất được báo cáo trong Bảng \ref{tab:4.6} và 9 tất nhiên không thu được trong tất cả các thí nghiệm. Bảng này cho biết số lượng phương tiện trung bình và quãng đường trung bình đã đi. Những con số này có thể được so sánh với những con số trong Bảng \ref{tab:4.6}.}
 \end{table}
 
-Trong tài liệu, bốn heuristics đã được áp dụng cho các bài toán điểm chuẩn: Heuristic của Li và Lim (2001), Heuristic của Bent và Van Henten-ryck (2003a), và hai heuristic thương mại: heuristic do SINTEF phát triển và heuristic do TetraSoft A/S phát triển. Các kết quả chi tiết cho heuristic cuối cùng không có sẵn, nhưng một số kết quả thu được bằng cách sử dụng các heuristic này có thể được tìm thấy trên một trang web do SINTEF ntef khai thác (http://www.sintef.no/static/am/opti/projects/top /vrp/ benchmarks.html).
+Trong tài liệu, bốn heuristics đã được áp dụng cho các bài toán benchmark: Heuristic của Li \& Lim (2001), Heuristic của Bent \& Van Henten-ryck (2003a), và hai heuristic thương mại: heuristic do SINTEF phát triển và heuristic do TetraSoft A/S phát triển. Các kết quả chi tiết cho heuristic cuối cùng không có sẵn, nhưng một số kết quả thu được bằng cách sử dụng các heuristic này có thể được tìm thấy trên một trang web do SINTEF ntef khai thác (http://www.sintef.no/static/am/opti/projects/top /vrp/ benchmarks.html).
 
-Phương pháp heuristic thu được chất lượng giải pháp tổng thể tốt nhất cho đến nay có lẽ là phương pháp của be Bent và Van Henten-ryck (2003a) (được rút gọn thành phương pháp phỏng đoán BH ở phần sau), do đó phương pháp phỏng đoán ALNS được so sánh với phương pháp phỏng đoán này trong Bảng 7. Các kết quả đầy đủ từ phương pháp BH heuristic có thể được tìm thấy trong Bent và Van Henten-ryck (2003b). Các kết quả của phương pháp BH heuristic là kết quả tốt nhất thu được trong số 10 thử nghiệm (mặc dù đối với trường hợp 100 vị trí, chỉ có 5 thử nghiệm được thực hiện). Cột Avg. TTB hiển thị thời gian trung bình cần thiết để chẩn đoán BH có được giải pháp tốt nhất. Đối với ALNS heuristic, tác giả chỉ liệt kê tổng thời gian đã sử dụng vì heuristic này - do thành phần ủ mô phỏng của nó - thường tìm ra giải pháp tốt nhất vào cuối quá trình tìm kiếm. Thử nghiệm BH đã được thử nghiệm trên bộ xử lý Athlon 1.2 GHz và do đó, thời gian chạy của hai thử nghiệm phải tương đương nhau (tác giả tin rằng bộ xử lý Athlon chậm hơn nhiều nhất là 20\% so với máy tính của tác giả). Các kết quả cho thấy rằng về tổng thể, ALNS heuristic chiếm ưu thế hơn BH heuristic, đặc biệt là khi kích thước của vấn đề tăng lên. Rõ ràng là phương pháp ALNS heuristic có thể cải thiện đáng kể các giải pháp đã biết trước đây và dù khá đơn giản nhưng thuật toán giảm số lượng phương tiện cũng hoạt động rất tốt. Hai cột cuối cùng trong bảng 7 tóm tắt các kết quả tốt nhất thu được bằng cách sử dụng một số thử nghiệm với các cài đặt tham số khác nhau, cho thấy rằng các kết quả thu được bằng ALNS thực sự có thể được cải thiện hơn nữa.
+Phương pháp heuristic thu được chất lượng giải pháp tổng thể tốt nhất cho đến nay có lẽ là phương pháp của be Bent \& Van Henten-ryck (2003a) (được rút gọn thành phương pháp BH heuristic ở phần sau), do đó phương pháp ALNS heuristic được so sánh với phương pháp này trong Bảng \ref{tab:4.6}. Các kết quả đầy đủ từ phương pháp BH heuristic có thể được tìm thấy trong Bent \& Van Henten-ryck (2003b). Các kết quả của phương pháp BH heuristic là kết quả tốt nhất thu được trong số 10 thử nghiệm (mặc dù đối với trường hợp 100 vị trí, chỉ có 5 thử nghiệm được thực hiện). Cột Avg. TTB hiển thị thời gian trung bình cần thiết để BH heuristic có được giải pháp tốt nhất. Đối với ALNS heuristic, tác giả chỉ liệt kê tổng thời gian đã sử dụng vì heuristic này - do tính chất "ủ mô phỏng" của nó - thường tìm ra giải pháp tốt nhất vào cuối quá trình tìm kiếm. Thử nghiệm BH đã được thực hiện trên bộ xử lý Athlon 1.2 GHz và do đó, thời gian chạy của hai thử nghiệm phải tương đương nhau (tác giả tin rằng bộ xử lý Athlon chậm hơn nhiều nhất là 20\% so với máy tính của tác giả). Các kết quả cho thấy rằng về tổng thể, ALNS heuristic chiếm ưu thế hơn BH heuristic, đặc biệt là khi kích thước của bài toán tăng lên. Rõ ràng là phương pháp ALNS heuristic có thể cải thiện đáng kể các giải pháp đã biết trước đây và dù khá đơn giản nhưng thuật toán giảm số lượng xe cũng hoạt động rất tốt. Hai cột cuối cùng trong Bảng \ref{tab:4.6} tóm tắt các kết quả tốt nhất thu được bằng cách sử dụng một số thử nghiệm với các cài đặt tham số khác nhau, cho thấy rằng các kết quả thu được bằng ALNS thực sự có thể được cải thiện hơn nữa.
 
-Bảng 9 so sánh các kết quả thu được từ ALNS với các giải pháp được biết đến nhiều nhất từ tài liệu. Có thể thấy rằng ALNS cải thiện hơn một nửa số giải pháp và đạt được giải pháp ít nhất cũng tốt bằng giải pháp tốt nhất đã biết trước đây cho 80\% vấn đề.
+Bảng \ref{tab:4.8} so sánh các kết quả thu được từ ALNS với các phương án được biết đến nhiều nhất trong lí thuyết. Có thể thấy rằng ALNS cải thiện hơn một nửa số phương án và tạo ra phương án ít nhất cũng tốt bằng giải pháp tốt nhất đã biết trước đây cho 80\% bài toán.
 
-Hai bảng nói trên chỉ xử lý các giải pháp tốt nhất được tìm thấy bởi ALNS heuristic. Bảng 10 cho thấy chất lượng trung bình của giải pháp thu được bằng heuristic. Những con số này có thể được so sánh với những con số trong Bảng 7. Điều đáng chú ý là giải pháp trung bình đôi khi có khoảng cách thấp hơn so với giải pháp “tốt nhất trong số 10 hoặc 5” trong Bảng 7; Đây chính là trường hợp ở hàng cuối cùng. Điều này là có thể vì heuristic tìm ra các giải pháp sử dụng nhiều hơn số lượng phương tiện tối thiểu và điều này thường tạo ra các giải pháp với khoảng cách ngắn hơn.
-Nhìn chung, có thể kết luận rằng ALNS heuristic phải được coi là một heuristic tiên tiến nhất cho PDPTW. Chi phí của các giải pháp tốt nhất được xác định trong các thí nghiệm được liệt kê trong Bảng 11 đến 16.
+Hai bảng nói trên chỉ xử lý các giải pháp tốt nhất được tìm thấy bởi ALNS heuristic. Bảng \ref{tab:4.9} cho thấy chất lượng trung bình của phương án thu được bằng heuristic. Những con số này có thể được so sánh với những con số trong Bảng \ref{tab:4.6}. Điều đáng chú ý là phương án trung bình đôi khi có khoảng cách nhỏ hơn so với giải pháp “tốt nhất trong số 10 hoặc 5” (best of 10 or 5) trong Bảng \ref{tab:4.6}; Đây chính là trường hợp ở hàng cuối cùng. Điều này là có thể vì heuristic tìm ra các phương án sử dụng nhiều hơn số lượng xe tối thiểu và điều này thường tạo ra các phương án với quãng đường ngắn hơn.
+Nhìn chung, có thể kết luận rằng ALNS heuristic phải được coi là một heuristic tiên tiến nhất cho PDPTW. Chi phí của các phương án tốt nhất được xác định trong các thí nghiệm được liệt kê trong Bảng \ref{tab:4.10} đến Bảng \ref{tab:4.15}.
 
-\begin{table}[caption={Best Results, 100 Locations}, label=tab:2]
+%Bảng 11
+
+\begin{table}[caption={Kết quả tốt nhất, 100 địa điểm}, label=tab:4.10]
     \resizebox{\textwidth}{!}{
     \begin{tabular}{lllllllllllll}
         \toprule
@@ -269,18 +291,19 @@ Nhìn chung, có thể kết luận rằng ALNS heuristic phải được coi l�
         12 & 9  & 1,003.77 &    &          &    &          &   &        &    &          &   &          \\
     \end{tabular}} \\
     \justify
-    \textit{Ghi Chú: Các trường hợp điểm chuẩn của Li và Lim (2001) được chia thành sáu bộ: R1, R2, C1, C2, RC1 và RC2. Mỗi cột chính tương ứng với một trong những bộ này; cột bên trái đưa ra số vấn đề. Đối với mỗi trường hợp vấn đề, tác giả báo cáo số lượng phương tiện và quãng đường di chuyển trong giải pháp tốt nhất thu được trong quá trình thử nghiệm. Số in đậm chỉ ra các giải pháp được biết đến nhiều nhất.}
+    \textit{Ghi Chú: Các trường hợp điểm chuẩn của Li \& Lim (2001) được chia thành sáu bộ: R1, R2, C1, C2, RC1 và RC2. Mỗi cột chính tương ứng với một trong những bộ này; cột bên trái đưa ra số bài toán. Đối với mỗi trường hợp bài toán, tác giả báo cáo số lượng phương tiện và quãng đường di chuyển trong giải pháp tốt nhất thu được trong quá trình thử nghiệm. Số in đậm chỉ ra các giải pháp được biết đến nhiều nhất.}
 \end{table}
 
 \subsection{Kết luận các tính toán thí nghiệm}
-Trong phần 4.4, tác giả đã nêu ba mục tiêu cho các tính toán thí nghiệm. Các thí nghiệm đã hoàn thành các mục tiêu này khi tác giả thấy rằng: (1) phương pháp LNS heuristic thích hợp kết hợp một số phương pháp loại bỏ và construction heuristic hiển thị hiệu suất vượt trội so với phương pháp LNS heuristic đơn giản chỉ sử dụng một phương pháp heuristic thêm và một phương pháp heuristic xóa; (2) một số đặc điểm của vấn đề ảnh hưởng đến hiệu suất của phương pháp LNS heuristic, nhưng tác giả không thấy rằng bất kỳ đặc điểm nào có thể làm cho phương pháp LNS heuristic hoạt động tốt hơn phương pháp ALNS heuristic; (3) phương pháp LNS heuristic thực sự có thể tìm thấy các giải pháp chất lượng tốt trong một khoảng thời gian hợp lý và heuristic vượt trội so với các heuristic được đề xuất trước đó.
+Trong phần 4.4, tác giả đã nêu ba mục tiêu cho các tính toán thí nghiệm. Các thí nghiệm đã hoàn thành các mục tiêu này khi tác giả thấy rằng: (1) phương pháp LNS heuristic thích hợp kết hợp một số phương pháp loại bỏ và kiến trúc heuristic hiển thị hiệu suất vượt trội so với phương pháp LNS heuristic đơn giản chỉ sử dụng một heuristic chèn và một heuristic xóa; (2) một số đặc điểm của bài toán ảnh hưởng đến hiệu suất của phương pháp LNS heuristic, nhưng tác giả không thấy rằng bất kỳ đặc điểm nào có thể làm cho phương pháp LNS heuristic hoạt động tốt hơn phương pháp ALNS heuristic; (3) phương pháp LNS heuristic thực sự có thể tìm thấy các phương án chất lượng tốt trong một khoảng thời gian hợp lý và heuristic vượt trội so với các heuristic được đề xuất trước đó.
 
-Các thí nghiệm cũng minh họa tầm quan trọng của việc thử nghiệm heuristic trên các tập hợp lớn các vấn đề, bởi vì sự khác biệt giữa LNS và ALNS chỉ thực sự trở nên rõ ràng khi ta xem xét các trường hợp lớn. Lưu ý rằng các vấn đề cần giải quyết trong thế giới thực thường có kích thước tương đương hoặc lớn hơn các vấn đề lớn nhất được giải quyết trong bài báo này.
+Các thí nghiệm cũng minh họa tầm quan trọng của việc thử nghiệm heuristic trên các tập hợp lớn các cấu hình bài toán, bởi vì sự khác biệt giữa LNS và ALNS chỉ thực sự trở nên rõ ràng khi ta xem xét các cấu hình lớn. Lưu ý rằng các bài toán cần giải quyết trong thế giới thực thường có kích thước tương đương hoặc lớn hơn các bài toán lớn nhất được giải quyết trong bài báo này.
 
-Cuối cùng, các tính toán thí nghiệm được thực hiện trong phần 4.3.3 chỉ ra rằng phương pháp LNS heuristic đơn giản dường như nhạy cảm với các lựa chọn của phương pháp heuristic xóa, hơn là với các lựa chọn của phương pháp heuristic thêm. Sẽ rất thú vị nếu điều này nói chung đúng cho các vấn đề khác.
+Cuối cùng, các tính toán thí nghiệm được thực hiện trong phần 4.3.3 chỉ ra rằng phương pháp LNS heuristic đơn giản dường như nhạy cảm với các lựa chọn của heuristic xóa, hơn là với các lựa chọn của heuristic chèn. Sẽ rất thú vị nếu điều này là đúng cho các bài toán khác.
 
+%Bảng 12
 
-\begin{table}[caption={Best Results, 200 Locations}, label=tab:2]
+\begin{table}[caption={Kết quả tốt nhất, 200 địa điểm}, label=tab:4.11]
     \resizebox{\textwidth}{!}{
     \begin{tabular}{lllllllllllll}
         \toprule
@@ -299,7 +322,9 @@ Cuối cùng, các tính toán thí nghiệm được thực hiện trong phần
     \end{tabular}} \\
 \end{table}
 
-\begin{table}[caption={Best Results, 400 Locations}, label=tab:2]
+%Bảng 13
+
+\begin{table}[caption={Kết quả tốt nhất, 400 địa điểm}, label=tab:4.12]
     \resizebox{\textwidth}{!}{
     \begin{tabular}{lllllllllllll}
         \toprule
@@ -318,7 +343,9 @@ Cuối cùng, các tính toán thí nghiệm được thực hiện trong phần
     \end{tabular}} \\
 \end{table}
 
-\begin{table}[caption={Best Results, 600 Locations}, label=tab:2]
+%Bảng 14
+
+\begin{table}[caption={Kết quả tốt nhất, 600 địa điểm}, label=tab:4.13]
     \resizebox{\textwidth}{!}{
     \begin{tabular}{lllllllllllll}
         \toprule
@@ -337,8 +364,9 @@ Cuối cùng, các tính toán thí nghiệm được thực hiện trong phần
     \end{tabular}} \\
 \end{table}
 
+%Bảng 15
 
-\begin{table}[caption={Best Results, 800 Locations}, label=tab:2]
+\begin{table}[caption={Kết quả tốt nhất, 800 địa điểm}, label=tab:4.14]
     \resizebox{\textwidth}{!}{
     \begin{tabular}{lllllllllllll}
         \toprule
@@ -357,7 +385,9 @@ Cuối cùng, các tính toán thí nghiệm được thực hiện trong phần
     \end{tabular}} \\
 \end{table}
 
-\begin{table}[caption={Best Results, 1,000 Locations}, label=tab:2]
+%Bảng 16
+
+\begin{table}[caption={Kết quả tốt nhất, 1,000 địa điểm}, label=tab:4.15]
     \resizebox{\textwidth}{!}{
     \begin{tabular}{lllllllllllll}
         \toprule
